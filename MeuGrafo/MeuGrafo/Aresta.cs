@@ -26,5 +26,13 @@ namespace ConsoleApplication1
 			this.destino = destino;
 			visitado = int.MinValue;
 		}
+
+		//Retorna o vertice oposto ao vertice passado com base na aresta
+		public Vertice verticeOposto(Vertice verticeInicial)
+		{
+			if (destino.Equals(verticeInicial)) return origem;
+			if (origem.Equals(verticeInicial)) return destino;
+			throw new GrafoException();
+		}
 	}
 }

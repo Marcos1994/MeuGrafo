@@ -19,23 +19,6 @@ namespace ConsoleApplication1
 			visitado = int.MinValue + 1;
 		}
 
-		//Retorna o vertice oposto ao vertice passado com base na aresta
-		public Vertice verticeOposto(Vertice verticeInicial, Aresta aresta)
-		{
-			if (aresta.destino.Equals(verticeInicial)) return aresta.origem;
-			if (aresta.origem.Equals(verticeInicial)) return aresta.destino;
-			throw new GrafoException();
-		}
-
-		//Retorna true se vertice1 e vertice2 forem adjacentes
-		public bool adjacente(Vertice vertice1, Vertice vertice2)
-		{
-			foreach (var aresta in vertice1.arestas)
-				if (aresta.destino.Equals(vertice2) || aresta.origem.Equals(vertice2))
-					return true;
-			return false;
-		}
-
 		//Substitui o elemento armazenado no vértice "vertice" por "novoElemento"
 		public void substituir(Vertice vertice, Object novoElemento)
 		{
@@ -73,7 +56,7 @@ namespace ConsoleApplication1
 			foreach (var aresta in vertice.arestas)
 			{//remover todas as arestas do vertice de seus adjacentes e do grafo
 				arestas.Remove(aresta);
-				verticeOposto(vertice, aresta).arestas.Remove(aresta);
+				aresta.verticeOposto(vertice).arestas.Remove(aresta);
 			}
 			vertices.Remove(vertice);
 			return vertice.valor;
@@ -99,7 +82,7 @@ namespace ConsoleApplication1
 		{
 			List<Vertice> adjacentes = new List<Vertice>();
 			foreach (var aresta in vertice.arestas)
-				adjacentes.Add(verticeOposto(vertice, aresta));
+				adjacentes.Add(aresta.verticeOposto(vertice));
 			return adjacentes;
 		}
 
@@ -190,11 +173,6 @@ if (caminhoEncontrado.peso < 0)
 return caminhoEncontrado.caminho;
 
 
-
-		}
-
-		private void menorCaminhoEncontrado()
-		{
 
 		}
 	}
