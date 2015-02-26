@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="GrafoWebService" Class="GrafoLinqDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=MARCOS-PC\SQLEXPRESS;Initial Catalog=GrafoWebService;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="GrafoWebServiceConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=ANDRE-PC\SQLEXPRESS;Initial Catalog=GrafoWebService;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="GrafoWebServiceConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tb_Aresta" Member="tb_Arestas">
     <Type Name="tb_Aresta">
       <Column Name="id_aresta" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -25,6 +25,7 @@
       <Column Name="id_grafo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="posX" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="posY" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nome" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
       <Association Name="tb_Vertice_tb_Aresta" Member="tb_Arestas" ThisKey="id_vertice" OtherKey="id_destino" Type="tb_Aresta" />
       <Association Name="tb_Vertice_tb_Aresta1" Member="tb_Arestas1" ThisKey="id_vertice" OtherKey="id_origem" Type="tb_Aresta" />
       <Association Name="tb_Grafo_tb_Vertice" Member="tb_Grafo" ThisKey="id_grafo" OtherKey="id_grafo" Type="tb_Grafo" IsForeignKey="true" />

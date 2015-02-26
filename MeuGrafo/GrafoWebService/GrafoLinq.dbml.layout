@@ -14,23 +14,23 @@
         <elementListCompartment Id="eee40a07-31f2-4d93-9066-54992bc04b39" absoluteBounds="0.765, 1.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="8d6f03d4-7397-440b-81df-8ad324ca6e44" absoluteBounds="3.5, 0.875, 2, 1.5785953776041666">
+    <classShape Id="c40b47b2-460b-47ba-b932-11857b1a96c2" absoluteBounds="3.5, 0.75, 2, 1.7708968098958331">
       <DataClassMoniker Name="/GrafoLinqDataContext/tb_Vertice" />
       <nestedChildShapes>
-        <elementListCompartment Id="8246dd31-04d0-4d70-86e7-126d0ffd7684" absoluteBounds="3.515, 1.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="43505f2c-980b-4fd0-be74-613741e77b49" absoluteBounds="3.5149999999999997, 1.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <associationConnector edgePoints="[(5.5 : 1.66429768880208); (6.25 : 1.66429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/GrafoLinqDataContext/tb_Vertice/tb_Vertice_tb_Aresta" />
       <nodes>
-        <classShapeMoniker Id="8d6f03d4-7397-440b-81df-8ad324ca6e44" />
+        <classShapeMoniker Id="c40b47b2-460b-47ba-b932-11857b1a96c2" />
         <classShapeMoniker Id="16f76b8f-716c-4858-aa75-7f5165b2c056" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(5.5 : 1.20714884440104); (6.25 : 1.20714884440104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/GrafoLinqDataContext/tb_Vertice/tb_Vertice_tb_Aresta1" />
       <nodes>
-        <classShapeMoniker Id="8d6f03d4-7397-440b-81df-8ad324ca6e44" />
+        <classShapeMoniker Id="c40b47b2-460b-47ba-b932-11857b1a96c2" />
         <classShapeMoniker Id="16f76b8f-716c-4858-aa75-7f5165b2c056" />
       </nodes>
     </associationConnector>
@@ -38,7 +38,7 @@
       <AssociationMoniker Name="/GrafoLinqDataContext/tb_Grafo/tb_Grafo_tb_Vertice" />
       <nodes>
         <classShapeMoniker Id="cbb45bc9-1ef1-4c3d-bdfd-a341a8e0bc59" />
-        <classShapeMoniker Id="8d6f03d4-7397-440b-81df-8ad324ca6e44" />
+        <classShapeMoniker Id="c40b47b2-460b-47ba-b932-11857b1a96c2" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

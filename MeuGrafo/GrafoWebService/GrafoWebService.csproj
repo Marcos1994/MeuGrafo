@@ -68,6 +68,8 @@
       <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="GrafoWebService\GrafoWSErro.cs" />
+    <Compile Include="NS_GrafoDAO\ArestaDAO.cs" />
+    <Compile Include="NS_GrafoDAO\VerticeDAO.cs" />
     <Compile Include="NS_GrafoPlus\ArestaPlus.cs" />
     <Compile Include="NS_GrafoDAO\GrafoDAO.cs" />
     <Compile Include="NS_GrafoPlus\GrafoPlus.cs" />

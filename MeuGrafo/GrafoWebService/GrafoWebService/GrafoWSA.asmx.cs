@@ -25,9 +25,10 @@ namespace GrafoWebService.GrafoWebService
 		public string criarGrafo(string nome)
 		{
 			JavaScriptSerializer js = new JavaScriptSerializer();
+			GrafoPlus grafo;
 			try
 			{
-				GrafoPlus grafo = new GrafoPlus(nome);
+				grafo = new GrafoPlus(nome);
 				grafo.criarGrafo();
 			}
 			catch(Exception ex)
@@ -41,14 +42,24 @@ namespace GrafoWebService.GrafoWebService
 		public string salvarGrafo(int idGrafo, string posicoesVertices)
 		{
 			JavaScriptSerializer js = new JavaScriptSerializer();
-			return js.Serialize(new Retorno());
+			return js.Serialize((new GrafoWSErro()).mensagem = "Metodo não implementado");
 		}
 
 		[WebMethod]
 		public string abrirGrafo(string nomeGrafo)
 		{
 			JavaScriptSerializer js = new JavaScriptSerializer();
-			return js.Serialize(new Retorno());
+			GrafoPlus grafo;
+			try
+			{
+				grafo = new GrafoPlus(nomeGrafo);
+				grafo.abrirGrafoPlus();
+			}
+			catch (Exception ex)
+			{
+				return js.Serialize(new GrafoWSErro(ex));
+			}
+			return js.Serialize(grafo);
 		}
 
 
@@ -99,6 +110,27 @@ namespace GrafoWebService.GrafoWebService
 		{
 			JavaScriptSerializer js = new JavaScriptSerializer();
 			return js.Serialize(new Retorno());
+		}
+
+
+
+		/*_________ Buscas _________*/
+
+		[WebMethod]
+		public string menorCaminho(string nome, int idOrigem, int idDestino)
+		{
+			JavaScriptSerializer js = new JavaScriptSerializer();
+			GrafoPlus grafo;
+			try
+			{
+				grafo = new GrafoPlus(nome);
+				grafo.abrirGrafo();
+			}
+			catch (Exception ex)
+			{
+				return js.Serialize(new GrafoWSErro(ex));
+			}
+			return js.Serialize(grafo);
 		}
 	}
 }
