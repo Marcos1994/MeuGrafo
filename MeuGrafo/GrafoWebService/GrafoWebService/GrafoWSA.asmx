@@ -1,1 +1,1 @@
-﻿<%@ WebService Language="C#" CodeBehind="GrafoWSA.asmx.cs" Class="GrafoWebService.WebService1" %>
+﻿<%@ WebService Language="C#" CodeBehind="GrafoWSA.asmx.cs" Class="GrafoWebService.GrafoWebService.GrafoWSA" %>

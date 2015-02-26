@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -61,6 +62,17 @@
     <Content Include="GrafoWebService\GrafoWSA.asmx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GrafoLinq.designer.cs">
+      <DependentUpon>GrafoLinq.dbml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="GrafoWebService\GrafoWSErro.cs" />
+    <Compile Include="NS_GrafoPlus\ArestaPlus.cs" />
+    <Compile Include="NS_GrafoDAO\GrafoDAO.cs" />
+    <Compile Include="NS_GrafoPlus\GrafoPlus.cs" />
+    <Compile Include="NS_GrafoPlus\VerticePlus.cs" />
+    <Compile Include="GrafoWebService\Retorno.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GrafoWebService\GrafoWSA.asmx.cs">
       <DependentUpon>GrafoWSA.asmx</DependentUpon>
@@ -68,6 +80,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="GrafoLinq.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>GrafoLinq.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -76,7 +93,18 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="GrafoDAO\" />
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MeuGrafo\MeuGrafo.csproj">
+      <Project>{64bea498-e342-451b-801d-9b82fab3538d}</Project>
+      <Name>MeuGrafo</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GrafoLinq.dbml.layout">
+      <DependentUpon>GrafoLinq.dbml</DependentUpon>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

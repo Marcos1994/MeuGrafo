@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Services;
+using GrafoWebService.NS_GrafoPlus;
 
 namespace GrafoWebService.GrafoWebService
 {
@@ -15,15 +16,24 @@ namespace GrafoWebService.GrafoWebService
 	[System.ComponentModel.ToolboxItem(false)]
 	// To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
 	// [System.Web.Script.Services.ScriptService]
-	public class WebService1 : System.Web.Services.WebService
+	public class GrafoWSA : System.Web.Services.WebService
 	{
 
 		/*_________ Grafo _________*/
 
 		[WebMethod]
-		public string criarGrafo()
+		public string criarGrafo(string nome)
 		{
 			JavaScriptSerializer js = new JavaScriptSerializer();
+			try
+			{
+				GrafoPlus grafo = new GrafoPlus(nome);
+				grafo.criarGrafo();
+			}
+			catch(Exception ex)
+			{
+				return js.Serialize(new GrafoWSErro(ex));
+			}
 			return js.Serialize(new Retorno());
 		}
 
@@ -46,7 +56,7 @@ namespace GrafoWebService.GrafoWebService
 		/*_________ Vertices _________*/
 
 		[WebMethod]
-		public string criarVertice(string nome)
+		public string criarVertice(int idGrafo)
 		{
 			JavaScriptSerializer js = new JavaScriptSerializer();
 			return js.Serialize(new Retorno());

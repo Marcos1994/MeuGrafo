@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using MeuGrafo;
 
-namespace GrafoWebService.GrafoPlus
+namespace GrafoWebService.NS_GrafoPlus
 {
 	public class ArestaPlus : Aresta
 	{
