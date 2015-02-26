@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication1
+namespace MeuGrafo
 {
 	public class Grafo
 	{
@@ -80,10 +80,7 @@ namespace ConsoleApplication1
 		//Retorna todos os vertices adjacentes ao Vertice "vertice"
 		public List<Vertice> verticesAdjacentes(Vertice vertice)
 		{
-			List<Vertice> adjacentes = new List<Vertice>();
-			foreach (var aresta in vertice.arestas)
-				adjacentes.Add(aresta.verticeOposto(vertice));
-			return adjacentes;
+			return vertice.verticesAdjacentes();
 		}
 
 		//Retorna uma lista de arestas contendo o menor caminho entre dois vertices

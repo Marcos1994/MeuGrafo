@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication1
+namespace MeuGrafo
 {
 	public class Vertice
 	{
@@ -26,6 +26,16 @@ namespace ConsoleApplication1
 				if (aresta.destino.Equals(vertice) || aresta.origem.Equals(vertice))
 					return true;
 			return false;
+		}
+
+		//Retorna uma lista com todos os vertices adjacentes a ele
+		public List<Vertice> verticesAdjacentes()
+		{
+			List<Vertice> verticesAdj = new List<Vertice>();
+			foreach (var aresta in arestas)
+				if(!verticesAdj.Contains(aresta.verticeOposto(this)))
+					verticesAdj.Add(aresta.verticeOposto(this));
+			return verticesAdj;
 		}
 	}
 }
