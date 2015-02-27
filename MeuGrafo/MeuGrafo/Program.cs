@@ -19,12 +19,16 @@ namespace MeuGrafo
 
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Informe o diretorio do arquivo:");
-			Console.WriteLine("(para exibir o teste padrão, apenas aperte enter)");
-			string diretorio = Console.ReadLine();
-			if (diretorio != "")
+			string diretorio = System.Reflection.Assembly.GetExecutingAssembly().Location;
+			string[] dr = diretorio.Split('\\');
+			diretorio = "";
+			for (int i = 0; i < dr.Count() - 3; i++)
+				diretorio += dr[i] + "\\";
+			Console.WriteLine("Informe o nome do arquivo (sem extensão) que deseja abrir:");
+			Console.WriteLine("Diretório padrão: MeuGrafo\\labirintos");
+			diretorio += Console.ReadLine() + ".dat";
+			try
 			{
-				//diretorio = @"C:\Users\Marcos\\Desktop\lista.dat";
 				FileInfo arquivo = new FileInfo(diretorio);
 				FileStream fs = arquivo.Open(FileMode.Open, FileAccess.Read);
 				StreamReader r = new StreamReader(fs);
@@ -36,9 +40,12 @@ namespace MeuGrafo
 						if (t == '0' || t == '1' || t == '2' || t == '3') labirintoString += t;
 				height = tr.Count();
 				if (height > 0) width = tr[0].Count();
+				Console.Clear();
 			}
-			else
+			catch
 			{
+				Console.Clear();
+				Console.WriteLine("Não foi possivel abrir o arquivo desejado\nlabirinto padrão:");
 				width = 30; height = 15;
 				labirintoString = "111111111111111111111111111111100000111000000010000010011111101110111101101000111110111111100010000001101310111100011111121110111011101110111111111111100000111011101100000111001111110110000000001111110010011111110110111111111300000000111111110110111111111111111000111111110000000000000011000000000111110111101111111011011011110111110111101111111011011011100011110111100000000311000001101111110000001111111000011100001111111111111111111111111111111111";
 			}
