@@ -105,6 +105,7 @@ namespace MeuGrafo
 			return vertice.verticesAdjacentes();
 		}
 
+		/*------------------ Menor Caminho ------------------*/
 		//Retorna uma lista de arestas contendo o menor caminho entre dois vertices
 		public List<Aresta> menorCaminho(Vertice origem, Vertice destino)
 		{
@@ -214,6 +215,7 @@ namespace MeuGrafo
 			return null;
 		}
 
+		/*------------------ A*++ ------------------*/
 		//Retorna uma lista de arestas contendo o menor caminho entre dois vertices
 		public List<Aresta> menorCaminho(Vertice origem, Object chaveDestino)
 		{
