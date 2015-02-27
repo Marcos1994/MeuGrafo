@@ -148,13 +148,16 @@ namespace MeuGrafo
 					{//ignora qualquer caminho cujo destino ja tenha sido visitado e que seja maior ou igual do que o encontrado para o destino
 						if (verticeOposto.Equals(destino))
 						{//É um caminho pro vertice de destino
-							caminhoEncontrado.peso = arestaDeMenorPeso.peso + aresta.peso; ;
-							caminhoEncontrado.caminho.Clear();
-							foreach (Aresta are in ((ArestaComposta)arestaDeMenorPeso).caminho)
-								caminhoEncontrado.caminho.Add(are); ;
-							caminhoEncontrado.caminho.Add(aresta);
-							//Removo todos os caminhos que sejam maiores ou iguais ao caminho encontrado
-							caminhosPossiveis.RemoveAll(a => a.peso >= caminhoEncontrado.peso);
+							if (arestaDeMenorPeso.peso + aresta.peso < caminhoEncontrado.peso)
+							{
+								caminhoEncontrado.peso = arestaDeMenorPeso.peso + aresta.peso;
+								caminhoEncontrado.caminho.Clear();
+								foreach (Aresta are in ((ArestaComposta)arestaDeMenorPeso).caminho)
+									caminhoEncontrado.caminho.Add(are);
+								caminhoEncontrado.caminho.Add(aresta);
+								//Removo todos os caminhos que sejam maiores ou iguais ao caminho encontrado
+								caminhosPossiveis.RemoveAll(a => a.peso >= caminhoEncontrado.peso);
+							}
 						}
 						else
 						{//É um caminho para um vertice qualquer
@@ -175,7 +178,7 @@ namespace MeuGrafo
 								arestaExistente.peso = aresta.peso + arestaDeMenorPeso.peso;
 								arestaExistente.caminho.Clear();
 								foreach (Aresta are in ((ArestaComposta)arestaDeMenorPeso).caminho)
-									arestaExistente.caminho.Add(are); ;
+									arestaExistente.caminho.Add(are);
 								arestaExistente.caminho.Add(aresta);
 							}
 						}
