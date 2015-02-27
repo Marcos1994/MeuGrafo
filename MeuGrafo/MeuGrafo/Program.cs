@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,8 +9,8 @@ namespace MeuGrafo
 {
 	class Program
 	{
-		private static int width;
-		private static int height;
+		private static int width = 0;
+		private static int height = 0;
 		private static int[,] labirinto;
 		private static string labirintoString;
 		private static string valor = "";
@@ -18,24 +19,47 @@ namespace MeuGrafo
 
 		static void Main(string[] args)
 		{
-			do
+			Console.WriteLine("Informe o diretorio do arquivo:");
+			Console.WriteLine("(para exibir o teste padrão, apenas aperte enter)");
+			string diretorio = Console.ReadLine();
+			if (diretorio != "")
 			{
-			selecionarGrafo();
-			grafo = new Grafo();
-			Console.WriteLine("Labirinto:");
-			gerarLabirintoInicial();
-			escreverLabirinto();
+				//diretorio = @"C:\Users\Marcos\\Desktop\lista.dat";
+				FileInfo arquivo = new FileInfo(diretorio);
+				FileStream fs = arquivo.Open(FileMode.Open, FileAccess.Read);
+				StreamReader r = new StreamReader(fs);
+				string trecho = r.ReadToEnd();
+				string[] tr = trecho.Split('\r');
+				labirintoString = "";
+				for (int i = 0; i < tr.Count(); i++)
+					foreach (char t in tr[i])
+						if (t == '0' || t == '1' || t == '2' || t == '3') labirintoString += t;
+				height = tr.Count();
+				if (height > 0) width = tr[0].Count();
+			}
+			else
+			{
+				width = 30; height = 15;
+				labirintoString = "111111111111111111111111111111100000111000000010000010011111101110111101101000111110111111100010000001101310111100011111121110111011101110111111111111100000111011101100000111001111110110000000001111110010011111110110111111111300000000111111110110111111111111111000111111110000000000000011000000000111110111101111111011011011110111110111101111111011011011100011110111100000000311000001101111110000001111111000011100001111111111111111111111111111111111";
+			}
+
+			if (width > 1 && height > 1)
+			{
+				grafo = new Grafo();
+				Console.WriteLine("Labirinto:");
+				gerarLabirintoInicial();
+				escreverLabirinto();
+				Console.ReadKey();
+				Console.BackgroundColor = ConsoleColor.Black;
+				Console.Clear();
+				gerarGrafo();
+				gerarSolucao();
+				Console.WriteLine("Solucao");
+				escreverLabirinto();
+			}
+			else
+				Console.WriteLine("O labirinto exibito tem menos de 1 linha ou menos de 1 coluna!");
 			Console.ReadKey();
-			Console.BackgroundColor = ConsoleColor.Black;
-			Console.Clear();
-			gerarGrafo();
-			gerarSolucao();
-			Console.WriteLine("Solucao");
-			escreverLabirinto();
-			Console.ReadKey();
-			Console.BackgroundColor = ConsoleColor.Black;
-			Console.Clear();
-			} while(indiceGrafo < 3);
 		}
 
 		private static void escreverLabirinto()
@@ -133,27 +157,6 @@ namespace MeuGrafo
 					labirinto[(dest.id / width), (dest.id % width)] = 4;
 				}
 			}
-		}
-
-		private static void selecionarGrafo()
-		{
-			++indiceGrafo;
-			switch (indiceGrafo)
-			{
-				case 1:
-					width = 10; height = 12;
-					labirintoString = "111111111110000000011200010101111101010110000001011011111101100000000111111111011100100001110300111110000003011111111111";
-					break;
-				case 2:
-					width = 30; height = 15;
-					labirintoString = "111111111111111111111111111111100000111000000010000010011111101110111101101000111110111111100010000001101310111100011111121110111011101110111111111111100000111011101100000111001111110110000000001111110010011111110110111111111300000000111111110110111111111111111000111111110000000000000011000000000111110111101111111011011011110111110111101111111011011011100011110111100000000311000001101111110000001111111000011100001111111111111111111111111111111111";
-					break;
-				default:
-					width = 21; height = 8;
-					labirintoString = "111111111111111111111120000000000011001001101111111101111000001101111111101111010101100011111101111011101101111111101111011101101111110000000011131111111111111111111111";
-					break;
-			}
-			
 		}
 	}
 }
