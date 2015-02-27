@@ -114,28 +114,23 @@ namespace MeuGrafo
 		{
 			List<Aresta> menorCaminho = new List<Aresta>();
 			VerticeComID origem = null;
-			VerticeComID destino = null;
+			string destino = "3";
 			for (int i = 0; i < labirintoString.Length; i++)
 				if (labirinto[(i / width), (i % width)] == 2)
 				{
 					origem = ((VerticeComID)grafo.vertices.Find(v => ((VerticeComID)v).id == i));
 					break;
 				}
-			for (int i = 0; i < labirintoString.Length; i++)
-				if (labirinto[(i / width), (i % width)] == 3)
-				{
-					destino = ((VerticeComID)grafo.vertices.Find(v => ((VerticeComID)v).id == i));
-					break;
-				}
-			if (origem != null && destino != null)
+			if (origem != null)
 			{
+				VerticeComID dest;
 				menorCaminho = grafo.menorCaminho(origem, destino);
 				foreach (Aresta aresta in menorCaminho)
 				{
 					origem = ((VerticeComID)aresta.origem);
 					labirinto[(origem.id / width), (origem.id % width)] = 4;
-					destino = ((VerticeComID)aresta.destino);
-					labirinto[(destino.id / width), (destino.id % width)] = 4;
+					dest = ((VerticeComID)aresta.destino);
+					labirinto[(dest.id / width), (dest.id % width)] = 4;
 				}
 			}
 		}
@@ -147,11 +142,11 @@ namespace MeuGrafo
 			{
 				case 1:
 					width = 10; height = 12;
-					labirintoString = "111111111110000000011200010101111101010110000001011011111101100000000111111111011100100001110100111110000003011111111111";
+					labirintoString = "111111111110000000011200010101111101010110000001011011111101100000000111111111011100100001110300111110000003011111111111";
 					break;
 				case 2:
 					width = 30; height = 15;
-					labirintoString = "111111111111111111111111111111100000111000000010000010011111101110111101101000111110111111100010000001101110111100011111121110111011101110111111111111100000111011101100000111001111110110000000001111110010011111110110111111111100000000111111110110111111111111111000111111110000000000000011000000000111110111101111111011011011110111110111101111111011011011100011110111100000000311000001101111110000001111111000011100001111111111111111111111111111111111";
+					labirintoString = "111111111111111111111111111111100000111000000010000010011111101110111101101000111110111111100010000001101310111100011111121110111011101110111111111111100000111011101100000111001111110110000000001111110010011111110110111111111300000000111111110110111111111111111000111111110000000000000011000000000111110111101111111011011011110111110111101111111011011011100011110111100000000311000001101111110000001111111000011100001111111111111111111111111111111111";
 					break;
 				default:
 					width = 21; height = 8;
