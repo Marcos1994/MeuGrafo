@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using MeuGrafo;
+using GrafoSimples;
 
 namespace GrafoWebService.NS_GrafoPlus
 {
