@@ -98,15 +98,15 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="GrafoLinq.dbml.layout">
+      <DependentUpon>GrafoLinq.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\MeuGrafo\MeuGrafo.csproj">
       <Project>{64bea498-e342-451b-801d-9b82fab3538d}</Project>
       <Name>MeuGrafo</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="GrafoLinq.dbml.layout">
-      <DependentUpon>GrafoLinq.dbml</DependentUpon>
-    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

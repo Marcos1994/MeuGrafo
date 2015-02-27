@@ -30,11 +30,11 @@ namespace MeuGrafo
 			this.peso = peso;
 			this.origem = origem;
 			this.destino = destino;
-			if (aresta.GetType().Equals(this)) //se for uma aresta composta
+			this.caminho = new List<Aresta>();
+			if (aresta != null && aresta.GetType().Equals(this)) //se for uma aresta composta
 				this.caminho = ((ArestaComposta)aresta).caminho;
-			else
+			else if (aresta != null)
 			{
-				this.caminho = new List<Aresta>();
 				caminho.Add(aresta);
 			}
 		}

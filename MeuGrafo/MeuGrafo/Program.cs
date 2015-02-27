@@ -11,8 +11,7 @@ namespace MeuGrafo
 		private static int width = 10;
 		private static int height = 12;
 		private static int[,] labirinto;
-		private static string labirintoString = "111111111110000000011200010101111101010110000001011011111103100000000111111111013100100001110100111110000003011111111111";
-		private static string opcao = "";
+		private static string labirintoString = "111111111110000000011200010101111101010110000001011011111101100000000111111111011100100001110100111110000003011111111111";
 		private static string valor = "";
 		private static Grafo grafo;
 
@@ -20,11 +19,13 @@ namespace MeuGrafo
 		{
 			grafo = new Grafo();
 			Console.WriteLine("Labirinto:");
+			gerarLabirintoInicial();
 			escreverLabirinto();
 			Console.ReadKey();
 			Console.BackgroundColor = ConsoleColor.Black;
-			Console.Clear();
-			//aqui vai ser gerado o menor caminho para poder ser escrito
+			//Console.Clear();
+			gerarGrafo();
+			gerarSolucao();
 			Console.WriteLine("Solucao");
 			escreverLabirinto();
 			Console.ReadKey();
@@ -32,7 +33,6 @@ namespace MeuGrafo
 
 		private static void escreverLabirinto()
 		{
-			gerarLabirintoInicial();
 			for (int i = 0; i < height; i++)
 			{
 				for (int j = 0; j < width; j++)
@@ -73,6 +73,63 @@ namespace MeuGrafo
 				if (labirintoString.Substring(i, 1) != "1")
 					grafo.vertices.Add(new VerticeComID(valor, i));
 				labirinto[(i / width), (i % width)] = int.Parse(labirintoString.Substring(i, 1));
+			}
+		}
+
+		private static void gerarGrafo()
+		{
+			Vertice vertice, verticeAux;
+			for (int i = 0; i < height; i++)
+			{
+				for (int j = 0; j < width; j++)
+				{
+					vertice = grafo.vertices.Find(v => ((VerticeComID)v).id == (i * width + j));
+					if (vertice != null && vertice.valor.ToString() != "1")
+					{
+						if (i + 1 < height)
+						{
+							verticeAux = grafo.vertices.Find(v => ((VerticeComID)v).id == ((i + 1) * width + j));
+							if (verticeAux != null && verticeAux.valor.ToString() != "1")
+								grafo.inserirAresta(vertice, verticeAux, 1);
+						}
+						if (j + 1 < width)
+						{
+							verticeAux = grafo.vertices.Find(v => ((VerticeComID)v).id == (i * width + j + 1));
+							if (verticeAux != null && verticeAux.valor.ToString() != "1")
+								grafo.inserirAresta(vertice, verticeAux, 1);
+						}
+					}
+				}
+			}
+		}
+
+		private static void gerarSolucao()
+		{
+			List<Aresta> menorCaminho = new List<Aresta>();
+			VerticeComID origem = null;
+			VerticeComID destino = null;
+			for (int i = 0; i < labirintoString.Length; i++)
+				if (labirinto[(i / width), (i % width)] == 2)
+				{
+					origem = ((VerticeComID)grafo.vertices.Find(v => ((VerticeComID)v).id == i));
+					break;
+				}
+			for (int i = 0; i < labirintoString.Length; i++)
+				if (labirinto[(i / width), (i % width)] == 3)
+				{
+					destino = ((VerticeComID)grafo.vertices.Find(v => ((VerticeComID)v).id == i));
+					break;
+				}
+			if (origem != null && destino != null)
+			{
+				menorCaminho = grafo.menorCaminho(origem, destino);
+				foreach (Aresta aresta in menorCaminho)
+				{
+					origem = ((VerticeComID)aresta.origem);
+					labirinto[(origem.id / width), (origem.id % width)] = 4;
+					destino = ((VerticeComID)aresta.destino);
+					labirinto[(destino.id / width), (destino.id % width)] = 4;
+				}
 			}
 		}
 	}
