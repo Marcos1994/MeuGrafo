@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace GrafoSimples
 {
-	class Heap
+	public class Heap
 	{
-		private Aresta[] arestas;
-		private int tamanho;
-		private int proximoElemento;
-		private int maiorPeso;
+		public Aresta[] arestas { get; set; }
+		public int tamanho { get; set; }
+		public int proximoElemento { get; set; }
+		public int maiorPeso { get; set; }
 
 		public Heap()
 		{
@@ -134,11 +134,19 @@ namespace GrafoSimples
 					downHeap(posicao);
 				else if (arestas[posicao].peso < aresta.peso)
 					upHeap(posicao);
+
+				if (maiorPeso == aresta.peso)
+				{
+					maiorPeso = int.MinValue;
+					foreach (Aresta a in arestas)
+						if (a.peso > maiorPeso)
+							maiorPeso = a.peso;
+				}
 			}
 		}
 
 		/*O(n*log(n))*/
-		public void removerMenoresQue(int peso)
+		public void removerMaioresQue(int peso)
 		{
 			if (proximoElemento != 0 && peso <= maiorPeso)
 			{
@@ -168,6 +176,16 @@ namespace GrafoSimples
 		public int Count()
 		{
 			return proximoElemento;
+		}
+
+		public Heap Clone()
+		{
+			Heap heap = new Heap();
+			heap.arestas = ((Aresta[])this.arestas.Clone());
+			heap.tamanho = this.tamanho;
+			heap.proximoElemento = this.proximoElemento;
+			heap.maiorPeso = this.maiorPeso;
+			return heap;
 		}
 	}
 }

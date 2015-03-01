@@ -130,105 +130,43 @@ namespace GrafoSimples
 		{
 			iterarVisita();
 			origem.visitado = visitado;
-
-			int verticesAVisitar = vertices.Count() - 2; //remove a origem e o destino
+			
 			ArestaComposta arestaDeMenorPeso;
+			ArestaComposta arestaNova;
 			Vertice verticeEmVisita;
 			Vertice verticeOposto;
 			bool caminhoNovo;
 
-			List<ArestaComposta> caminhosPossiveis = new List<ArestaComposta>(); //Poderia ser uma heap com chave = aresta.peso
+			Heap caminhosPossiveis = new Heap();
+			Heap caminhosAuxiliares = origem.arestas.Clone();
 			ArestaComposta caminhoEncontrado = new ArestaComposta(origem, destino);
-			foreach (var aresta in origem.arestas)
+
+			while (caminhosAuxiliares.Count() > 0)
 			{
-				if (aresta.peso < caminhoEncontrado.peso)
-				{//ignora qualquer caminho que seja maior do que o encontrado para o destino
-					verticeOposto = aresta.verticeOposto(origem);
-					if (verticeOposto.Equals(destino))
-					{//É um caminho pro vertice de destino
-						caminhoEncontrado.peso = aresta.peso;
+				if (caminhosAuxiliares.Top().peso < caminhoEncontrado.peso)
+				{
+					arestaDeMenorPeso = ((ArestaComposta)caminhosAuxiliares.Top());
+					if (arestaDeMenorPeso.verticeOposto(origem).Equals(destino))
+					{
+						caminhoEncontrado.peso = arestaDeMenorPeso.peso;
 						caminhoEncontrado.caminho.Clear();
-						caminhoEncontrado.caminho.Add(aresta);
-						//Removo todos os caminhos que sejam maiores ou iguais ao caminho encontrado
-						caminhosPossiveis.RemoveAll(a => a.peso >= caminhoEncontrado.peso);
+						caminhoEncontrado.caminho.Add(caminhosAuxiliares.Remove());
+						//caminhosPossiveis.removerMaioresQue(caminhoEncontrado.peso);
+						//Não precisa remover os caminhos maiores que ele pelo fato de que os caminhos são retirados em ordem crescente
+						break; //Ja achei o menor caminho direto para o destino
 					}
 					else
-					{//É um caminho para um vertice qualquer
-						//Verifico se ja tem um caminho para esse vertice
-						arestaDeMenorPeso = checarCaminho(caminhosPossiveis, verticeOposto);
-						if (arestaDeMenorPeso == null) //Não tem nenhum caminho pra esse vertice
-							caminhosPossiveis.Add(new ArestaComposta(origem, verticeOposto, aresta));
-						else if (aresta.peso < arestaDeMenorPeso.peso)
-						{//substituo o caminho para o vertice pelo caminho menor
-							arestaDeMenorPeso.peso = aresta.peso;
-							arestaDeMenorPeso.caminho.Clear();
-							arestaDeMenorPeso.caminho.Add(aresta);
-						}
-					}
+						caminhosPossiveis.Add(new ArestaComposta(origem, arestaDeMenorPeso.verticeOposto(origem), arestaDeMenorPeso.peso, caminhosAuxiliares.Remove()));
 				}
 			}
 
 			//enquanto ainda tiver vertices a serem visitados...
-			while (verticesAVisitar-- > 0)
+			while (caminhosPossiveis.Count() > 0 && caminhosPossiveis.Top().peso < caminhoEncontrado.peso)
 			{
-				arestaDeMenorPeso = new ArestaComposta();
-				//verifico qual dos caminhos cujo destino ainda não foi visitado tem menor peso
-				foreach (ArestaComposta aresta in caminhosPossiveis)
-					if (aresta.verticeOposto(origem).visitado != visitado && aresta.peso < arestaDeMenorPeso.peso)
-						arestaDeMenorPeso = aresta;
-				if (arestaDeMenorPeso.peso == int.MaxValue) break; //Se não foi encontrado nenhum caminho possível
-				caminhosPossiveis.Remove(arestaDeMenorPeso);//Removo o caminho que estou visitando dos caminhos possíveis
-				verticeEmVisita = arestaDeMenorPeso.verticeOposto(origem); //Pego o vertice que irei visitar
-				verticeEmVisita.visitado = visitado; //Informo que o vertice foi(será)visitado
 
-				//Ja tenho a aresta de menor peso e o vertice a que ela leva
-
-				foreach (var aresta in verticeEmVisita.arestas)
-				{//vou ver pra onde esse vertice pode ir e criar os caminhos
-					verticeOposto = aresta.verticeOposto(verticeEmVisita);
-					if ((verticeOposto.visitado != visitado) && (aresta.peso < caminhoEncontrado.peso))
-					{//ignora qualquer caminho cujo destino ja tenha sido visitado e que seja maior ou igual do que o encontrado para o destino
-						if (verticeOposto.Equals(destino))
-						{//É um caminho pro vertice de destino
-							if (arestaDeMenorPeso.peso + aresta.peso < caminhoEncontrado.peso)
-							{
-								caminhoEncontrado.peso = arestaDeMenorPeso.peso + aresta.peso;
-								caminhoEncontrado.caminho.Clear();
-								foreach (Aresta are in ((ArestaComposta)arestaDeMenorPeso).caminho)
-									caminhoEncontrado.caminho.Add(are);
-								caminhoEncontrado.caminho.Add(aresta);
-								//Removo todos os caminhos que sejam maiores ou iguais ao caminho encontrado
-								caminhosPossiveis.RemoveAll(a => a.peso >= caminhoEncontrado.peso);
-							}
-						}
-						else
-						{//É um caminho para um vertice qualquer
-							//Verifico se ja tem um caminho para esse vertice
-							ArestaComposta arestaExistente = checarCaminho(caminhosPossiveis, verticeOposto);
-							if (arestaExistente == null) //Não tem nenhum caminho pra esse vertice
-							{
-								arestaExistente = new ArestaComposta(origem, verticeOposto);
-								arestaExistente.peso = arestaDeMenorPeso.peso + aresta.peso;
-								arestaExistente.caminho.Clear();
-								foreach (Aresta are in ((ArestaComposta)arestaDeMenorPeso).caminho)
-									arestaExistente.caminho.Add(are);
-								arestaExistente.caminho.Add(aresta);
-								caminhosPossiveis.Add(arestaExistente);
-							}
-							else if (aresta.peso + arestaDeMenorPeso.peso < arestaExistente.peso)
-							{//substituo o caminho para o vertice pelo caminho menor
-								arestaExistente.peso = aresta.peso + arestaDeMenorPeso.peso;
-								arestaExistente.caminho.Clear();
-								foreach (Aresta are in ((ArestaComposta)arestaDeMenorPeso).caminho)
-									arestaExistente.caminho.Add(are);
-								arestaExistente.caminho.Add(aresta);
-							}
-						}
-					}
-				}
 			}
 
-			if (caminhoEncontrado.peso != int.MaxValue)
+			if (caminhoEncontrado.caminho.Count > 0)
 				return caminhoEncontrado.caminho;
 
 			return null;

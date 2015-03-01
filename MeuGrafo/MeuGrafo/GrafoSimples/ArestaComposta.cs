@@ -31,9 +31,7 @@ namespace GrafoSimples
 			this.origem = origem;
 			this.destino = destino;
 			this.caminho = new List<Aresta>();
-			if (aresta != null && aresta.GetType().Equals(this)) //se for uma aresta composta
-				this.caminho = ((ArestaComposta)aresta).caminho;
-			else if (aresta != null)
+			if (aresta != null)
 			{
 				caminho.Add(aresta);
 			}
