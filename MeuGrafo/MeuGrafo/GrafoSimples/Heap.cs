@@ -39,27 +39,29 @@ namespace GrafoSimples
 		}
 
 		/*O(log(n))*/
-		private void downHeap()
+		private void downHeap(int posicao = 0)
 		{
-			int posicao = 0;
-			int limite = (proximoElemento-1)/2;
-			Aresta aux;
-			int filho;
-			while(posicao <= limite)
-			{/*Enquanto ele estiver dentro do limite, terá pelo menois 1 filho*/
-				filho = (posicao * 2 + 1);
-				if (filho + 1 <= proximoElemento) /*se tem filho direito, tem filho esquerdo*/
-					if (arestas[filho].peso > arestas[filho + 1].peso)//Se o filho direito for menor que o esquerto, escolha-o
-						filho++;
-				if (arestas[posicao].peso > arestas[filho].peso)
-				{
-					aux = arestas[(posicao * 2 + 1)];
-					arestas[filho] = arestas[posicao];
-					arestas[posicao] = aux;
-					posicao = filho;
+			if (proximoElemento > 1)
+			{
+				int limite = (proximoElemento - 1) / 2;
+				Aresta aux;
+				int filho;
+				while (posicao <= limite)
+				{/*Enquanto ele estiver dentro do limite, terá pelo menois 1 filho*/
+					filho = (posicao * 2 + 1);
+					if (filho + 1 <= proximoElemento) /*se tem filho direito, tem filho esquerdo*/
+						if (arestas[filho].peso > arestas[filho + 1].peso)//Se o filho direito for menor que o esquerto, escolha-o
+							filho++;
+					if (arestas[posicao].peso > arestas[filho].peso)
+					{
+						aux = arestas[(posicao * 2 + 1)];
+						arestas[filho] = arestas[posicao];
+						arestas[posicao] = aux;
+						posicao = filho;
+					}
+					else
+						break;
 				}
-				else
-					break;
 			}
 		}
 
@@ -84,7 +86,7 @@ namespace GrafoSimples
 		}
 
 		/*O(log(n))*/
-		public void inserir(Aresta aresta)
+		public void Add(Aresta aresta)
 		{
 			this.expandirArestas();
 			arestas[proximoElemento] = aresta;
@@ -94,7 +96,7 @@ namespace GrafoSimples
 		}
 
 		/*O(1)*/
-		public Aresta visualizarTopo()
+		public Aresta Top()
 		{
 			if (proximoElemento == 0)
 				throw new HeapException("A Heap está vazia");
@@ -102,7 +104,7 @@ namespace GrafoSimples
 		}
 
 		/*O(log(n))*/
-		public Aresta remover()
+		public Aresta Remove()
 		{
 			if (proximoElemento == 0)
 				throw new HeapException("A Heap está vazia");
@@ -114,6 +116,27 @@ namespace GrafoSimples
 			return retorno;
 		}
 
+		/*O(n)*/
+		public void Remove(Aresta aresta)
+		{
+			if (proximoElemento-- == 0)
+				throw new HeapException("A Heap está vazia");
+			int posicao = 0;
+			for (; posicao <= proximoElemento; posicao++)
+				if (arestas[posicao].Equals(aresta))
+					break;
+			if (posicao > proximoElemento)
+				throw new HeapException("Elemento não encontrado");
+			if (proximoElemento != 0)
+			{
+				arestas[posicao] = arestas[proximoElemento];
+				if (arestas[posicao].peso > aresta.peso)
+					downHeap(posicao);
+				else if (arestas[posicao].peso < aresta.peso)
+					upHeap(posicao);
+			}
+		}
+
 		/*O(n*log(n))*/
 		public void removerMenoresQue(int peso)
 		{
@@ -122,14 +145,29 @@ namespace GrafoSimples
 				int i = 0;
 				maiorPeso = int.MinValue;
 				Aresta[] arestasAux = new Aresta[tamanho];
-				while(this.visualizarTopo().peso < peso)
+				while(this.Top().peso < peso)
 				{
-					this.atualizarMaiorPeso(this.visualizarTopo().peso);
-					arestasAux[i++] = this.remover();
+					this.atualizarMaiorPeso(this.Top().peso);
+					arestasAux[i++] = this.Remove();
 				}
 				proximoElemento = i;
 				arestas = arestasAux;
 			}
+		}
+
+		/*O(n)*/
+		public Aresta[] ToArray()
+		{
+			Aresta[] retorno = new Aresta[proximoElemento];
+			for (int i = 0; i < proximoElemento; i++)
+				retorno[i] = arestas[i];
+			return retorno;
+		}
+
+		/*O(1)*/
+		public int Count()
+		{
+			return proximoElemento;
 		}
 	}
 }

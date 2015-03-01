@@ -9,33 +9,35 @@ namespace GrafoSimples
 	public class Vertice
 	{
 		public Object valor { get; set; }
-		public List<Aresta> arestas { get; set; }
+		public Heap arestas { get; set; }
 		public int visitado { get; set; }
 
 		public Vertice(Object valor)
 		{
 			this.valor = valor;
-			arestas = new List<Aresta>();
+			arestas = new Heap();
 			visitado = int.MinValue;
 		}
 
-		//Retorna true se vertice1 e vertice2 forem adjacentes
+		/*O(n)*/
 		public bool adjacente(Vertice vertice)
 		{
-			foreach (var aresta in arestas)
+			Aresta[] aux = arestas.ToArray();
+			foreach (var aresta in aux)
 				if (aresta.destino.Equals(vertice) || aresta.origem.Equals(vertice))
 					return true;
 			return false;
 		}
 
-		//Retorna uma lista com todos os vertices adjacentes a ele
-		public List<Vertice> verticesAdjacentes()
-		{
-			List<Vertice> verticesAdj = new List<Vertice>();
-			foreach (var aresta in arestas)
-				if(!verticesAdj.Contains(aresta.verticeOposto(this)))
-					verticesAdj.Add(aresta.verticeOposto(this));
-			return verticesAdj;
-		}
+		/*O(n)*/
+		//public Vertice[] verticesAdjacentes()
+		//{
+		//	Aresta[] arrayArestas = arestas.toArray();
+		//	List<Vertice> vertices = new List<Vertice>();
+		//	foreach (var aresta in arrayArestas)
+		//		if (aresta.verticeOposto(this) && !vertices.Contains(aresta.verticeOposto(this)))
+		//			vertices.Add(aresta.verticeOposto(this));
+		//	return vertices.ToArray();
+		//}
 	}
 }
