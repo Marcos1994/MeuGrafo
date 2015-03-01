@@ -45,6 +45,8 @@
     <Compile Include="GrafoSimples\ArestaComposta.cs" />
     <Compile Include="GrafoSimples\Grafo.cs" />
     <Compile Include="GrafoSimples\GrafoException.cs" />
+    <Compile Include="GrafoSimples\Heap.cs" />
+    <Compile Include="GrafoSimples\HeapException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GrafoSimples\Vertice.cs" />

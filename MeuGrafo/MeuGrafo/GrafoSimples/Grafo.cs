@@ -8,8 +8,8 @@ namespace GrafoSimples
 {
 	public class Grafo
 	{
-		public List<Vertice> vertices { get; set; }
-		public List<Aresta> arestas { get; set; }
+		public List<Vertice> vertices;
+		public List<Aresta> arestas;
 		private int visitado;
 
 		private void iterarVisita()

@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace GrafoSimples
 {
-	class GrafoException : Exception
+	class HeapException : Exception
 	{
-		public GrafoException()
+		public HeapException()
 			: base("Ocorreu algum erro")
 		{
 		}
-
-		public GrafoException(string msg)
+		public HeapException(string msg)
 			: base(msg)
 		{
 		}
