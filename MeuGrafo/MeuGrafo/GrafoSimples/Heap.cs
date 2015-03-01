@@ -86,10 +86,10 @@ namespace GrafoSimples
 		/*O(log(n))*/
 		public void inserir(Aresta aresta)
 		{
-			expandirArestas();
+			this.expandirArestas();
 			arestas[proximoElemento] = aresta;
-			upHeap(proximoElemento);
-			atualizarMaiorPeso(aresta.peso);
+			this.upHeap(proximoElemento);
+			this.atualizarMaiorPeso(aresta.peso);
 			proximoElemento++;
 		}
 
@@ -110,15 +110,25 @@ namespace GrafoSimples
 			arestas[0] = arestas[--proximoElemento];
 			if (proximoElemento == 0) /*Como eu removo sempre a aresta de menor peso, o maior peso será o ultimo a sair.*/
 				maiorPeso = int.MinValue;
-			downHeap();
+			this.downHeap();
 			return retorno;
 		}
 
 		/*O(n*log(n))*/
 		public void removerMenoresQue(int peso)
 		{
-			if (proximoElemento != 0)
+			if (proximoElemento != 0 && peso <= maiorPeso)
 			{
+				int i = 0;
+				maiorPeso = int.MinValue;
+				Aresta[] arestasAux = new Aresta[tamanho];
+				while(this.visualizarTopo().peso < peso)
+				{
+					this.atualizarMaiorPeso(this.visualizarTopo().peso);
+					arestasAux[i++] = this.remover();
+				}
+				proximoElemento = i;
+				arestas = arestasAux;
 			}
 		}
 	}
