@@ -220,10 +220,10 @@ namespace GrafoSimples
 			{
 				if (caminhosAuxiliares.Top().peso < caminhoEncontrado.peso)
 				{
-					arestaDeMenorPeso = ((ArestaComposta)caminhosAuxiliares.Top());
-					if (arestaDeMenorPeso.verticeOposto(origem).valor.Equals(chaveDestino))
+                    Aresta arestaAux = caminhosAuxiliares.Top();
+                    if (arestaAux.verticeOposto(origem).valor.Equals(chaveDestino))
 					{
-						caminhoEncontrado.peso = arestaDeMenorPeso.peso;
+                        caminhoEncontrado.peso = arestaAux.peso;
 						caminhoEncontrado.caminho.Clear();
 						caminhoEncontrado.caminho.Add(caminhosAuxiliares.Remove());
 						//caminhosPossiveis.removerMaioresQue(caminhoEncontrado.peso);
@@ -231,7 +231,7 @@ namespace GrafoSimples
 						break; //Ja achei o menor caminho direto para o destino
 					}
 					else
-						caminhosPossiveis.Add(new ArestaComposta(origem, arestaDeMenorPeso.verticeOposto(origem), arestaDeMenorPeso.peso, caminhosAuxiliares.Remove()));
+                        caminhosPossiveis.Add(new ArestaComposta(origem, arestaAux.verticeOposto(origem), arestaAux.peso, caminhosAuxiliares.Remove()));
 				}
 			}
 
