@@ -4,12 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MeuGrafo
+namespace GrafoSimples
 {
-	class GrafoException : Exception
+	class HeapException : Exception
 	{
-		public GrafoException()
+		public HeapException()
 			: base("Ocorreu algum erro")
+		{
+		}
+		public HeapException(string msg)
+			: base(msg)
 		{
 		}
 	}

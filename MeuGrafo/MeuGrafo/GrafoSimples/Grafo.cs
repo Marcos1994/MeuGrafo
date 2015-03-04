@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MeuGrafo
+namespace GrafoSimples
 {
 	public class Grafo
 	{
