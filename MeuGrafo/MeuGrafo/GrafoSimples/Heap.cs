@@ -43,13 +43,13 @@ namespace GrafoSimples
 		{
 			if (proximoElemento > 1)
 			{
-				int limite = (proximoElemento - 1) / 2;
+				int limite = (proximoElemento - 2) / 2;
 				Aresta aux;
 				int filho;
 				while (posicao <= limite)
 				{/*Enquanto ele estiver dentro do limite, terá pelo menois 1 filho*/
 					filho = (posicao * 2 + 1);
-					if (filho + 1 <= proximoElemento) /*se tem filho direito, tem filho esquerdo*/
+					if (filho + 1 < proximoElemento) /*se tem filho direito, tem filho esquerdo*/
 						if (arestas[filho].peso > arestas[filho + 1].peso)//Se o filho direito for menor que o esquerto, escolha-o
 							filho++;
 					if (arestas[posicao].peso > arestas[filho].peso)
@@ -110,6 +110,7 @@ namespace GrafoSimples
 				throw new HeapException("A Heap está vazia");
 			Aresta retorno = arestas[0];
 			arestas[0] = arestas[--proximoElemento];
+			arestas[proximoElemento] = null;
 			if (proximoElemento == 0) /*Como eu removo sempre a aresta de menor peso, o maior peso será o ultimo a sair.*/
 				maiorPeso = int.MinValue;
 			this.downHeap();
