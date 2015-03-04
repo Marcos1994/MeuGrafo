@@ -11,14 +11,12 @@ namespace GrafoSimples
 		public Aresta[] arestas { get; set; }
 		public int tamanho { get; set; }
 		public int proximoElemento { get; set; }
-		public int maiorPeso { get; set; }
 
 		public Heap()
 		{
 			proximoElemento = 0;
 			tamanho = 16;
 			arestas = new Aresta[tamanho];
-			maiorPeso = int.MinValue;
 		}
 
 		/*O(log(n))*/
@@ -78,20 +76,12 @@ namespace GrafoSimples
 			}
 		}
 
-		/*O(1)*/
-		private void atualizarMaiorPeso(int peso)
-		{
-			if (peso > maiorPeso)
-				maiorPeso = peso;
-		}
-
 		/*O(log(n))*/
 		public void Add(Aresta aresta)
 		{
 			this.expandirArestas();
 			arestas[proximoElemento] = aresta;
 			this.upHeap(proximoElemento);
-			this.atualizarMaiorPeso(aresta.peso);
 			proximoElemento++;
 		}
 
@@ -111,8 +101,6 @@ namespace GrafoSimples
 			Aresta retorno = arestas[0];
 			arestas[0] = arestas[--proximoElemento];
 			arestas[proximoElemento] = null;
-			if (proximoElemento == 0) /*Como eu removo sempre a aresta de menor peso, o maior peso será o ultimo a sair.*/
-				maiorPeso = int.MinValue;
 			this.downHeap();
 			return retorno;
 		}
@@ -135,32 +123,6 @@ namespace GrafoSimples
 					downHeap(posicao);
 				else if (arestas[posicao].peso < aresta.peso)
 					upHeap(posicao);
-
-				if (maiorPeso == aresta.peso)
-				{
-					maiorPeso = int.MinValue;
-					foreach (Aresta a in arestas)
-						if (a.peso > maiorPeso)
-							maiorPeso = a.peso;
-				}
-			}
-		}
-
-		/*O(n*log(n))*/
-		public void removerMaioresQue(int peso)
-		{
-			if (proximoElemento != 0 && peso <= maiorPeso)
-			{
-				int i = 0;
-				maiorPeso = int.MinValue;
-				Aresta[] arestasAux = new Aresta[tamanho];
-				while(this.Top().peso < peso)
-				{
-					this.atualizarMaiorPeso(this.Top().peso);
-					arestasAux[i++] = this.Remove();
-				}
-				proximoElemento = i;
-				arestas = arestasAux;
 			}
 		}
 
@@ -185,7 +147,6 @@ namespace GrafoSimples
 			heap.arestas = ((Aresta[])this.arestas.Clone());
 			heap.tamanho = this.tamanho;
 			heap.proximoElemento = this.proximoElemento;
-			heap.maiorPeso = this.maiorPeso;
 			return heap;
 		}
 	}

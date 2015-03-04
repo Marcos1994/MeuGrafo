@@ -178,7 +178,6 @@ namespace GrafoSimples
 							foreach (Aresta a in arestaDeMenorPeso.caminho)
 								caminhoEncontrado.caminho.Add(a);
 							caminhoEncontrado.caminho.Add(caminhosAuxiliares.Remove());
-							caminhosPossiveis.removerMaioresQue(caminhoEncontrado.peso);
 							break; //Ja achei o menor caminho para o destino a partir desse vertice
 						}
 						else
@@ -258,7 +257,6 @@ namespace GrafoSimples
 								foreach (Aresta a in arestaDeMenorPeso.caminho)
 									caminhoEncontrado.caminho.Add(a);
 								caminhoEncontrado.caminho.Add(arestaEmVisita);
-								caminhosPossiveis.removerMaioresQue(caminhoEncontrado.peso);
 								break; //Ja achei o menor caminho para o destino a partir desse vertice
 							}
 							else
