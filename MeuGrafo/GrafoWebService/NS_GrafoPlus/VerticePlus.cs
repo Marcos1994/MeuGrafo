@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using GrafoSimples;
+using GrafoWebService.NS_GrafoDAO;
 using GrafoWebService.NS_GrafoDTO;
 
 namespace GrafoWebService.NS_GrafoPlus
@@ -20,12 +21,21 @@ namespace GrafoWebService.NS_GrafoPlus
 
 		}
 
-		public VerticePlus(string valor, int idVertice, int posX, int posY)
+		public VerticePlus(string valor, int posX, int posY, int cor = 0)
+			: base(valor)
+		{
+			this.posX = posX;
+			this.posY = posY;
+			this.cor = cor;
+		}
+
+		public VerticePlus(string valor, int idVertice, int posX, int posY, int cor = 0)
 			: base(valor)
 		{
 			this.posX = posX;
 			this.posY = posY;
 			this.idVertice = idVertice;
+			this.cor = cor;
 		}
 
 		public VerticeDTO gerarDTO()
@@ -37,6 +47,19 @@ namespace GrafoWebService.NS_GrafoPlus
 			vertice.posX = this.posX;
 			vertice.posY = this.posY;
 			return vertice;
+		}
+
+		public void criarVertice(int idGrafo)
+		{
+			VerticeDAO dao = new VerticeDAO();
+			try
+			{
+				dao.criarVertice(idGrafo, this.valor.ToString(), this.posX, this.posY);
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
 		}
 	}
 }

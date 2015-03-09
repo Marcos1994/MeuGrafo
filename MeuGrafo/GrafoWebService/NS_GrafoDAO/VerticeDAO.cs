@@ -17,7 +17,14 @@ namespace GrafoWebService.NS_GrafoDAO
 			novoVertice.posX = posX;
 			novoVertice.posY = posY;
 			dt.tb_Vertices.InsertOnSubmit(novoVertice);
-			dt.SubmitChanges();
+			try
+			{
+				dt.SubmitChanges();
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
 		}
 	}
 }

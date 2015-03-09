@@ -98,5 +98,18 @@ namespace GrafoWebService.NS_GrafoPlus
 				grafo.vertices.Add(vertice.gerarDTO());
 			return grafo;
 		}
+
+		public void salvarDimensoes()
+		{
+			GrafoDAO dao = new GrafoDAO();
+			try
+			{
+				dao.salvarDimensoes(this.nome, this.width, this.height);
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
 	}
 }

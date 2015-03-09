@@ -47,11 +47,23 @@ namespace GrafoWebService.GrafoWebService
 			return js.Serialize((new GrafoWSErro()).mensagem = "Metodo não implementado");
 		}
 
-		[WebMethod]
-		public string alterarDimensoes(int width, int height)
+		[WebMethod] /*OK*/
+		public string alterarDimensoes(string nomeGrafo, int width, int height)
 		{
 			JavaScriptSerializer js = new JavaScriptSerializer();
-			return js.Serialize((new GrafoWSErro()).mensagem = "Metodo não implementado");
+			GrafoPlus grafo;
+			try
+			{
+				grafo = new GrafoPlus(nomeGrafo);
+				grafo.abrirGrafo();
+				grafo.salvarDimensoes();
+				GrafoDTO grafoDTO = grafo.gerarDTO();
+				return js.Serialize(new RetornoComposto(grafoDTO));
+			}
+			catch (Exception ex)
+			{
+				return js.Serialize(new GrafoWSErro(ex));
+			}
 		}
 
 		[WebMethod] /*OK*/
@@ -77,50 +89,70 @@ namespace GrafoWebService.GrafoWebService
 
 		/*_________ Vertices _________*/
 
-		[WebMethod]
-		public string criarVertice(int idGrafo, string valorVertice)
+		[WebMethod] /*OK*/
+		public string criarVertice(int idGrafo, string valorVertice, int posX, int posY)
 		{
 			JavaScriptSerializer js = new JavaScriptSerializer();
-			return js.Serialize(new Retorno());
+			VerticePlus vertice = new VerticePlus(valorVertice, posX, posY);
+			try
+			{
+				vertice.criarVertice(idGrafo);
+				VerticeDTO verticeDTO = vertice.gerarDTO();
+				return js.Serialize(new RetornoComposto(verticeDTO));
+			}
+			catch (Exception ex)
+			{
+				return js.Serialize(new GrafoWSErro(ex));
+			}
 		}
 
 		[WebMethod]
 		public string removerVertice(int idVertice)
 		{
 			JavaScriptSerializer js = new JavaScriptSerializer();
-			return js.Serialize(new Retorno());
+			return js.Serialize((new GrafoWSErro()).mensagem = "Metodo não implementado");
 		}
 
 		[WebMethod]
 		public string alterarValor(int idVertice, string valor)
 		{
 			JavaScriptSerializer js = new JavaScriptSerializer();
-			return js.Serialize(new Retorno());
+			return js.Serialize((new GrafoWSErro()).mensagem = "Metodo não implementado");
 		}
 
 
 
 		/*_________ Arestas _________*/
 
-		[WebMethod]
+		[WebMethod] /*OK*/
 		public string criarAresta(int idOrigem, int idDestino, int peso)
 		{
 			JavaScriptSerializer js = new JavaScriptSerializer();
-			return js.Serialize(new Retorno());
+			ArestaPlus aresta = new ArestaPlus(peso, idOrigem, idDestino);
+			try
+			{
+				aresta.criarAresta();
+				ArestaDTO arestaDTO = aresta.gerarDTO();
+				return js.Serialize(new RetornoComposto(arestaDTO));
+			}
+			catch (Exception ex)
+			{
+				return js.Serialize(new GrafoWSErro(ex));
+			}
 		}
 
 		[WebMethod]
 		public string removerAresta(int idAresta)
 		{
 			JavaScriptSerializer js = new JavaScriptSerializer();
-			return js.Serialize(new Retorno());
+			return js.Serialize((new GrafoWSErro()).mensagem = "Metodo não implementado");
 		}
 
 		[WebMethod]
 		public string alterarPeso(int idAresta, string valor)
 		{
 			JavaScriptSerializer js = new JavaScriptSerializer();
-			return js.Serialize(new Retorno());
+			return js.Serialize((new GrafoWSErro()).mensagem = "Metodo não implementado");
 		}
 
 
@@ -131,6 +163,7 @@ namespace GrafoWebService.GrafoWebService
 		public string menorCaminho(string nome, int idOrigem, int idDestino)
 		{
 			JavaScriptSerializer js = new JavaScriptSerializer();
+			return js.Serialize((new GrafoWSErro()).mensagem = "Metodo não implementado");
 			GrafoPlus grafo;
 			try
 			{
@@ -148,6 +181,7 @@ namespace GrafoWebService.GrafoWebService
 		public string menorCaminhoEstrela(string nome, int idOrigem, string chaveDestino)
 		{
 			JavaScriptSerializer js = new JavaScriptSerializer();
+			return js.Serialize((new GrafoWSErro()).mensagem = "Metodo não implementado");
 			GrafoPlus grafo;
 			try
 			{

@@ -56,5 +56,21 @@ namespace GrafoWebService.NS_GrafoDAO
 				throw ex;
 			}
 		}
+
+		public void salvarDimensoes(string nome, int width, int height)
+		{
+			GrafoLinqDataContext dt = new GrafoLinqDataContext();
+			try
+			{
+				tb_Grafo novoGrafo = dt.tb_Grafos.First();
+				novoGrafo.width = width;
+				novoGrafo.height = height;
+				dt.SubmitChanges();
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
 	}
 }
