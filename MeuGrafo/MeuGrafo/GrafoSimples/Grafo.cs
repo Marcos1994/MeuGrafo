@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -112,11 +113,9 @@ namespace GrafoSimples
 			iterarVisita();
 			origem.visitado = visitado;
 
-			int verticesAVisitar = vertices.Count() - 2; //remove a origem e o destino
 			ArestaComposta arestaDeMenorPeso;
 			Vertice verticeEmVisita;
 			Vertice verticeOposto;
-			bool caminhoNovo;
 
 			List<ArestaComposta> caminhosPossiveis = new List<ArestaComposta>(); //Poderia ser uma heap com chave = aresta.peso
 			ArestaComposta caminhoEncontrado = new ArestaComposta(origem, destino);
@@ -127,6 +126,7 @@ namespace GrafoSimples
 					verticeOposto = aresta.verticeOposto(origem);
 					if (verticeOposto.Equals(destino))
 					{//É um caminho pro vertice de destino
+						caminhoEncontrado.destino = verticeOposto;
 						caminhoEncontrado.peso = aresta.peso;
 						caminhoEncontrado.caminho.Clear();
 						caminhoEncontrado.caminho.Add(aresta);
@@ -150,7 +150,7 @@ namespace GrafoSimples
 			}
 
 			//enquanto ainda tiver vertices a serem visitados...
-			while(verticesAVisitar-- > 0)
+			while (caminhosPossiveis.Count() > 0)
 			{
 				arestaDeMenorPeso = new ArestaComposta();
 				//verifico qual dos caminhos cujo destino ainda não foi visitado tem menor peso
@@ -173,6 +173,7 @@ namespace GrafoSimples
 						{//É um caminho pro vertice de destino
 							if (arestaDeMenorPeso.peso + aresta.peso < caminhoEncontrado.peso)
 							{
+								caminhoEncontrado.destino = verticeOposto;
 								caminhoEncontrado.peso = arestaDeMenorPeso.peso + aresta.peso;
 								caminhoEncontrado.caminho.Clear();
 								foreach (Aresta are in ((ArestaComposta)arestaDeMenorPeso).caminho)
@@ -215,18 +216,15 @@ namespace GrafoSimples
 			return null;
 		}
 
-		/*------------------ A*++ ------------------*/
-		//Retorna uma lista de arestas contendo o menor caminho entre dois vertices
+		//Retorna uma lista de arestas contendo o menor caminho entre um vertice de origem e um valor de destino
 		public List<Aresta> menorCaminho(Vertice origem, Object chaveDestino)
 		{
 			iterarVisita();
 			origem.visitado = visitado;
 
-			int verticesAVisitar = vertices.Count() - 1; //remove a origem e o destino
 			ArestaComposta arestaDeMenorPeso;
 			Vertice verticeEmVisita;
 			Vertice verticeOposto;
-			bool caminhoNovo;
 
 			List<ArestaComposta> caminhosPossiveis = new List<ArestaComposta>(); //Poderia ser uma heap com chave = aresta.peso
 			Vertice destino = new Vertice(chaveDestino);
@@ -262,7 +260,7 @@ namespace GrafoSimples
 			}
 
 			//enquanto ainda tiver vertices a serem visitados...
-			while (verticesAVisitar-- > 0)
+			while (caminhosPossiveis.Count() > 0)
 			{
 				arestaDeMenorPeso = new ArestaComposta();
 				//verifico qual dos caminhos cujo destino ainda não foi visitado tem menor peso
@@ -325,6 +323,64 @@ namespace GrafoSimples
 			if (caminhoEncontrado.peso != int.MaxValue)
 				return caminhoEncontrado.caminho;
 
+			return null;
+		}
+
+		public ArrayList colorirGrafo()
+		{
+			if (vertices.Count > 0)
+			{
+				iterarVisita();								//Itero a visita
+				int verticesRestantes = vertices.Count;		//Defino um contador
+				Queue<Vertice> fila = new Queue<Vertice>();	//Crio a fila para busca em largura
+				ArrayList cores = new ArrayList();			//Crio o array de cores
+				fila.Enqueue(vertices.First());				//Pego um vertice qualquer e coloco na fila
+				Vertice verticeEmVisita;
+				List<Vertice> adjacentes;
+				int indiceCor;
+				bool temAdjacente;
+				while (verticesRestantes-- > 0)
+				{
+					if (fila.Count < 1)					//Se a fila estiver vazia
+						foreach (Vertice v in vertices)	//Vou procurar nos vertices
+							if (v.visitado != visitado)	//Algum que não tenha sido visitado
+							{							//Então
+								fila.Enqueue(v);		//Enfileiro
+								break;					//E continuo
+							}
+
+					verticeEmVisita = fila.Dequeue();					//Pego o primeiro vertice da fila
+					verticeEmVisita.visitado = visitado;				//Digo que ele está sendo visitado
+					adjacentes = verticeEmVisita.verticesAdjacentes();	//Pego seus adjacentes
+					foreach (Vertice v in adjacentes)					//E dos adjacentes...
+						if (v.visitado != visitado)						//Aquele que não foi visitado...
+							fila.Enqueue(v);							//Eu enfileiro
+
+					//Vou percorrer todas as cores procurando aquela que não contenha nenhum dos adjacentes do VerticeEmVisita
+					for (indiceCor = 0; indiceCor < cores.Count; indiceCor++)
+					{
+						temAdjacente = false;
+						foreach(Vertice adj in adjacentes)
+							if (((List<Vertice>)cores[indiceCor]).Contains(adj))
+							{
+								temAdjacente = true;
+								break;
+							}
+
+						if (!temAdjacente)	//Quando achar alguma cor que não tenha nenhum dos adjacentes
+							break;			//Break! e adiciono-o à cor
+					}
+
+					if (indiceCor == cores.Count)		//Se ele saiu do laço por falta de cores
+						cores.Add(new List<Vertice>());	//Crio uma nova cor
+
+					//Se saiu por falta de cores ou por que achou uma cor que não tem adjacentes à ele
+					//Adiciono o vertice ao indice da cor
+					((List<Vertice>)cores[indiceCor]).Add(verticeEmVisita);
+				}
+
+				return cores;
+			}
 			return null;
 		}
 	}
