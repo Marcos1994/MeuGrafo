@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using MeuGrafo;
+using GrafoSimples;
+using GrafoWebService.NS_GrafoDTO;
 
 namespace GrafoWebService.NS_GrafoPlus
 {
@@ -26,6 +27,16 @@ namespace GrafoWebService.NS_GrafoPlus
 			this.idAresta = idAresta;
 			this.idOrigem = origem.idVertice;
 			this.idDestino = destino.idVertice;
+		}
+
+		public ArestaDTO gerarDTO()
+		{
+			ArestaDTO aresta = new ArestaDTO();
+			aresta.idAresta = this.idAresta;
+			aresta.idOrigem = this.idOrigem;
+			aresta.idDestino = this.idDestino;
+			aresta.peso = this.peso;
+			return aresta;
 		}
 	}
 }

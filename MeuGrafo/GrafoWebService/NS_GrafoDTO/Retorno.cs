@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace GrafoWebService.GrafoWebService
+namespace GrafoWebService.NS_GrafoDTO
 {
 	public class Retorno
 	{

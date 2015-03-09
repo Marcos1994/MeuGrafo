@@ -15,7 +15,8 @@ CREATE TABLE tb_Vertice
 	id_grafo INT FOREIGN KEY REFERENCES tb_Grafo(id_grafo) NOT NULL,
 	nome VARCHAR(30) NOT NULL,
 	posX INT NOT NULL,
-	posY INT NOT NULL
+	posY INT NOT NULL,
+	cor INT
 );
 
 CREATE TABLE tb_Aresta

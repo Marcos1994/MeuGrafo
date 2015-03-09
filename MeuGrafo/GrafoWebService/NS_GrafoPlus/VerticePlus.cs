@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using MeuGrafo;
+using GrafoSimples;
+using GrafoWebService.NS_GrafoDTO;
 
 namespace GrafoWebService.NS_GrafoPlus
 {
@@ -11,6 +12,7 @@ namespace GrafoWebService.NS_GrafoPlus
 		public int idVertice { get; set; }
 		public int posX { get; set; }
 		public int posY { get; set; }
+		public int cor { get; set; }
 
 		public VerticePlus(string valor)
 			: base(valor)
@@ -24,6 +26,17 @@ namespace GrafoWebService.NS_GrafoPlus
 			this.posX = posX;
 			this.posY = posY;
 			this.idVertice = idVertice;
+		}
+
+		public VerticeDTO gerarDTO()
+		{
+			VerticeDTO vertice = new VerticeDTO();
+			vertice.cor = this.cor;
+			vertice.idVertice = this.idVertice;
+			vertice.valor = this.valor.ToString();
+			vertice.posX = this.posX;
+			vertice.posY = this.posY;
+			return vertice;
 		}
 	}
 }

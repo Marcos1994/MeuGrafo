@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Services;
 using GrafoWebService.NS_GrafoPlus;
+using GrafoWebService.NS_GrafoDTO;
 
 namespace GrafoWebService.GrafoWebService
 {
@@ -30,12 +31,13 @@ namespace GrafoWebService.GrafoWebService
 			{
 				grafo = new GrafoPlus(nome);
 				grafo.criarGrafo();
+				GrafoDTO grafoDTO = grafo.gerarDTO();
+				return js.Serialize(new RetornoComposto(grafoDTO));
 			}
 			catch(Exception ex)
 			{
 				return js.Serialize(new GrafoWSErro(ex));
 			}
-			return js.Serialize(new Retorno());
 		}
 
 		[WebMethod]
@@ -49,17 +51,19 @@ namespace GrafoWebService.GrafoWebService
 		public string abrirGrafo(string nomeGrafo)
 		{
 			JavaScriptSerializer js = new JavaScriptSerializer();
-			GrafoPlus grafo;
 			try
 			{
+				GrafoPlus grafo;
 				grafo = new GrafoPlus(nomeGrafo);
-				grafo.abrirGrafoPlus();
+				grafo.abrirGrafo();
+				GrafoDTO grafoDTO = grafo.gerarDTO();
+
+				return js.Serialize(grafoDTO);
 			}
 			catch (Exception ex)
 			{
 				return js.Serialize(new GrafoWSErro(ex));
 			}
-			return js.Serialize(grafo);
 		}
 
 
