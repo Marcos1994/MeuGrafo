@@ -67,14 +67,18 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="GrafoWebService\GrafoWSErro.cs" />
     <Compile Include="NS_GrafoDAO\ArestaDAO.cs" />
     <Compile Include="NS_GrafoDAO\VerticeDAO.cs" />
+    <Compile Include="NS_GrafoDTO\ArestaDTO.cs" />
+    <Compile Include="NS_GrafoDTO\GrafoDTO.cs" />
+    <Compile Include="NS_GrafoDTO\GrafoWSErro.cs" />
+    <Compile Include="NS_GrafoDTO\Retorno.cs" />
+    <Compile Include="NS_GrafoDTO\RetornoComposto.cs" />
+    <Compile Include="NS_GrafoDTO\VerticeDTO.cs" />
     <Compile Include="NS_GrafoPlus\ArestaPlus.cs" />
     <Compile Include="NS_GrafoDAO\GrafoDAO.cs" />
     <Compile Include="NS_GrafoPlus\GrafoPlus.cs" />
     <Compile Include="NS_GrafoPlus\VerticePlus.cs" />
-    <Compile Include="GrafoWebService\Retorno.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GrafoWebService\GrafoWSA.asmx.cs">
       <DependentUpon>GrafoWSA.asmx</DependentUpon>
