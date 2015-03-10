@@ -4,6 +4,7 @@
 		<title>MeuGrafo</title>
 		<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript" src="js/webservices.js"></script>
 		<link type="text/css" rel="stylesheet" href="css/main.css">
 	</head>
 	<body>
@@ -38,14 +39,16 @@
 							</li>
 							
 							<li>
-								<svg class="icone" id="ico_novo">
-									<rect fill="#F26101" fill-opacity="0" width="40" height="40"/>
-									<g>
-										<polygon fill="#304269" points="30,35 10,35 10,5 25,5 30,10 		"/>
-										<polygon fill="#91BED4" points="25,19 21,19 21,15 19,15 19,19 15,19 15,21 19,21 19,25 21,25 21,21 25,21 		"/>
-									</g>
-								</svg>
-								<h2>Novo Grafo</h2>
+								<a href="javascript:criarGrafo();">
+									<svg class="icone" id="ico_novo">
+										<rect fill="#F26101" fill-opacity="0" width="40" height="40"/>
+										<g>
+											<polygon fill="#304269" points="30,35 10,35 10,5 25,5 30,10 		"/>
+											<polygon fill="#91BED4" points="25,19 21,19 21,15 19,15 19,19 15,19 15,21 19,21 19,25 21,25 21,21 25,21 		"/>
+										</g>
+									</svg>
+									<h2>Novo Grafo</h2>
+								</a>
 							</li>
 							
 							<li>
@@ -218,5 +221,8 @@
 		<h1>Nenhum grafo aberto</h1>
 		<div id="grafo">
 		</div>
+		
+		<div id="modal"></div>
+		<div id="mascara"></div>
 	</body>
 </html>
