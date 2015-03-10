@@ -6,9 +6,9 @@ border: 0px;
 font-family: Consolas;
 }
 
-body { margin-top: 45px; }
+body { padding-top: 45px; }
 
-h1 { margin-left: 15%; }
+h1 { margin-left: 20%; }
 
 #menu
 {
@@ -23,10 +23,45 @@ box-shadow: 0px 3px 3px #ccc;
 
 #menu #itens
 {
-width: 370px;
+width: 290px;
 height: 40px;
 margin: 0px auto;
 }
+
+#menu ul li
+{
+float: left;
+list-style: none;
+}
+
+#menu ol li
+{
+float: none;
+list-style: none;
+background-color: #D9E8F5;
+}
+
+#dropDown ol
+{
+float: left;
+position: absolute;
+top: 40px;
+height: 0px;
+overflow: hidden;
+clear: left;
+box-shadow: 3px 3px 3px #ccc;
+}
+#dropDown:hover ol { height: auto; }
+#dropDown .icone { float: left; }
+
+#dropDown ol li
+{
+width: 290px;
+height: 40px;
+}
+#dropDown ol li:hover { background-color: #F26101; }
+#dropDown h2 { line-height: 40px; font-size: 20px; }
+#dropDown h3 { line-height: 18px; font-size: 15px; }
 
 .vazio
 {
@@ -39,7 +74,7 @@ height: 40px;
 .icone
 {
 position: relative;
-float: left;
+float: right;
 width: 40px;
 height: 40px;
 }
@@ -52,5 +87,5 @@ border-top: 1px #eee solid;
 border-left: 1px #eee solid;
 width: 450px;
 height: 210px;
-margin-left: 5px;
+margin: 0px auto;
 }

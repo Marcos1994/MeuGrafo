@@ -52,7 +52,7 @@ namespace GrafoWebService.NS_GrafoPlus
 		{
 			try
 			{
-				ArestaDAO dao = new ArestaDAO()
+				ArestaDAO dao = new ArestaDAO();
 				dao.criarAresta(this.idOrigem, this.idDestino, this.peso);
 			}
 			catch (Exception ex)

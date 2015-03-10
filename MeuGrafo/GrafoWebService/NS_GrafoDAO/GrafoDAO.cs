@@ -62,7 +62,7 @@ namespace GrafoWebService.NS_GrafoDAO
 			GrafoLinqDataContext dt = new GrafoLinqDataContext();
 			try
 			{
-				tb_Grafo novoGrafo = dt.tb_Grafos.First();
+				tb_Grafo novoGrafo = dt.tb_Grafos.First(g => g.nome == nome);
 				novoGrafo.width = width;
 				novoGrafo.height = height;
 				dt.SubmitChanges();

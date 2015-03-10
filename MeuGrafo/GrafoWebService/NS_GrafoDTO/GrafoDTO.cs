@@ -16,8 +16,8 @@ namespace GrafoWebService.NS_GrafoDTO
 
 		public GrafoDTO()
 		{
-			vertices = new List<VerticeDTO>;
-			arestas = new List<ArestaDTO>;
+			vertices = new List<VerticeDTO>();
+			arestas = new List<ArestaDTO>();
 		}
 	}
 }

@@ -40,12 +40,12 @@ namespace GrafoWebService.GrafoWebService
 			}
 		}
 
-		[WebMethod]
-		public string salvarGrafo(string vertices)
-		{
-			JavaScriptSerializer js = new JavaScriptSerializer();
-			return js.Serialize((new GrafoWSErro()).mensagem = "Metodo não implementado");
-		}
+		//[WebMethod]
+		//public string salvarGrafo(string vertices)
+		//{
+		//	JavaScriptSerializer js = new JavaScriptSerializer();
+		//	return js.Serialize((new GrafoWSErro()).mensagem = "Metodo não implementado");
+		//}
 
 		[WebMethod] /*OK*/
 		public string alterarDimensoes(string nomeGrafo, int width, int height)
@@ -56,6 +56,8 @@ namespace GrafoWebService.GrafoWebService
 			{
 				grafo = new GrafoPlus(nomeGrafo);
 				grafo.abrirGrafo();
+				grafo.width = width;
+				grafo.height = height;
 				grafo.salvarDimensoes();
 				GrafoDTO grafoDTO = grafo.gerarDTO();
 				return js.Serialize(new RetornoComposto(grafoDTO));
@@ -106,19 +108,19 @@ namespace GrafoWebService.GrafoWebService
 			}
 		}
 
-		[WebMethod]
-		public string removerVertice(int idVertice)
-		{
-			JavaScriptSerializer js = new JavaScriptSerializer();
-			return js.Serialize((new GrafoWSErro()).mensagem = "Metodo não implementado");
-		}
+		//[WebMethod]
+		//public string removerVertice(int idVertice)
+		//{
+		//	JavaScriptSerializer js = new JavaScriptSerializer();
+		//	return js.Serialize((new GrafoWSErro()).mensagem = "Metodo não implementado");
+		//}
 
-		[WebMethod]
-		public string alterarValor(int idVertice, string valor)
-		{
-			JavaScriptSerializer js = new JavaScriptSerializer();
-			return js.Serialize((new GrafoWSErro()).mensagem = "Metodo não implementado");
-		}
+		//[WebMethod]
+		//public string alterarValor(int idVertice, string valor)
+		//{
+		//	JavaScriptSerializer js = new JavaScriptSerializer();
+		//	return js.Serialize((new GrafoWSErro()).mensagem = "Metodo não implementado");
+		//}
 
 
 
@@ -128,7 +130,7 @@ namespace GrafoWebService.GrafoWebService
 		public string criarAresta(int idOrigem, int idDestino, int peso)
 		{
 			JavaScriptSerializer js = new JavaScriptSerializer();
-			ArestaPlus aresta = new ArestaPlus(peso, idOrigem, idDestino);
+			ArestaPlus aresta = new ArestaPlus(idOrigem, idDestino, peso);
 			try
 			{
 				aresta.criarAresta();
@@ -141,58 +143,58 @@ namespace GrafoWebService.GrafoWebService
 			}
 		}
 
-		[WebMethod]
-		public string removerAresta(int idAresta)
-		{
-			JavaScriptSerializer js = new JavaScriptSerializer();
-			return js.Serialize((new GrafoWSErro()).mensagem = "Metodo não implementado");
-		}
+		//[WebMethod]
+		//public string removerAresta(int idAresta)
+		//{
+		//	JavaScriptSerializer js = new JavaScriptSerializer();
+		//	return js.Serialize((new GrafoWSErro()).mensagem = "Metodo não implementado");
+		//}
 
-		[WebMethod]
-		public string alterarPeso(int idAresta, string valor)
-		{
-			JavaScriptSerializer js = new JavaScriptSerializer();
-			return js.Serialize((new GrafoWSErro()).mensagem = "Metodo não implementado");
-		}
+		//[WebMethod]
+		//public string alterarPeso(int idAresta, string valor)
+		//{
+		//	JavaScriptSerializer js = new JavaScriptSerializer();
+		//	return js.Serialize((new GrafoWSErro()).mensagem = "Metodo não implementado");
+		//}
 
 
 
 		/*_________ Buscas _________*/
 
-		[WebMethod]
-		public string menorCaminho(string nome, int idOrigem, int idDestino)
-		{
-			JavaScriptSerializer js = new JavaScriptSerializer();
-			return js.Serialize((new GrafoWSErro()).mensagem = "Metodo não implementado");
-			GrafoPlus grafo;
-			try
-			{
-				grafo = new GrafoPlus(nome);
-				grafo.abrirGrafo();
-			}
-			catch (Exception ex)
-			{
-				return js.Serialize(new GrafoWSErro(ex));
-			}
-			return js.Serialize(grafo);
-		}
+		//[WebMethod]
+		//public string menorCaminho(string nome, int idOrigem, int idDestino)
+		//{
+		//	JavaScriptSerializer js = new JavaScriptSerializer();
+		//	return js.Serialize((new GrafoWSErro()).mensagem = "Metodo não implementado");
+		//	GrafoPlus grafo;
+		//	try
+		//	{
+		//		grafo = new GrafoPlus(nome);
+		//		grafo.abrirGrafo();
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		return js.Serialize(new GrafoWSErro(ex));
+		//	}
+		//	return js.Serialize(grafo);
+		//}
 
-		[WebMethod]
-		public string menorCaminhoEstrela(string nome, int idOrigem, string chaveDestino)
-		{
-			JavaScriptSerializer js = new JavaScriptSerializer();
-			return js.Serialize((new GrafoWSErro()).mensagem = "Metodo não implementado");
-			GrafoPlus grafo;
-			try
-			{
-				grafo = new GrafoPlus(nome);
-				grafo.abrirGrafo();
-			}
-			catch (Exception ex)
-			{
-				return js.Serialize(new GrafoWSErro(ex));
-			}
-			return js.Serialize(grafo);
-		}
+		//[WebMethod]
+		//public string menorCaminhoEstrela(string nome, int idOrigem, string chaveDestino)
+		//{
+		//	JavaScriptSerializer js = new JavaScriptSerializer();
+		//	return js.Serialize((new GrafoWSErro()).mensagem = "Metodo não implementado");
+		//	GrafoPlus grafo;
+		//	try
+		//	{
+		//		grafo = new GrafoPlus(nome);
+		//		grafo.abrirGrafo();
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		return js.Serialize(new GrafoWSErro(ex));
+		//	}
+		//	return js.Serialize(grafo);
+		//}
 	}
 }
