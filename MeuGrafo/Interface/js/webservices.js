@@ -57,6 +57,11 @@ function ws_abrirGrafo()
 						$("#grafo").css('width', parseInt(grafo.width));
 						$("#grafo").css('height', parseInt(grafo.height));
 						$("#grafo").html('');
+						for(i = 0; i < grafo.vertices.length; i++)
+						{
+							alert(grafo.vertices[i].idVertice);
+						}
+						alert(grafo.arestas.length);
 					}
 					else
 					{

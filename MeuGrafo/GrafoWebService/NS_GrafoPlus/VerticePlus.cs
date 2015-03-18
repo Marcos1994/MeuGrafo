@@ -21,12 +21,12 @@ namespace GrafoWebService.NS_GrafoPlus
 
 		}
 
-		public VerticePlus(string valor, int posX, int posY, int cor = 0)
+		public VerticePlus(string valor, int posX, int posY)
 			: base(valor)
 		{
 			this.posX = posX;
 			this.posY = posY;
-			this.cor = cor;
+			this.cor = 0;
 		}
 
 		public VerticePlus(string valor, int idVertice, int posX, int posY, int cor = 0)

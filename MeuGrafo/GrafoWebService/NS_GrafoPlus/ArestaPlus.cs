@@ -31,11 +31,13 @@ namespace GrafoWebService.NS_GrafoPlus
 		}
 
 		public ArestaPlus(VerticePlus origem, VerticePlus destino, int peso, int idAresta)
-			: base(origem, destino, peso)
 		{
-			this.idAresta = idAresta;
+			this.origem = origem;
 			this.idOrigem = origem.idVertice;
+			this.destino = destino;
 			this.idDestino = destino.idVertice;
+			this.idAresta = idAresta;
+			this.peso = peso;
 		}
 
 		public ArestaDTO gerarDTO()

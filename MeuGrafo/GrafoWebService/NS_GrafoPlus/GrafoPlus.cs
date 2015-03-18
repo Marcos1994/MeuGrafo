@@ -59,7 +59,8 @@ namespace GrafoWebService.NS_GrafoPlus
 		//Adiciona um vertice ja existente ao grafo
 		public void inserirVertice(string valor, int posX, int posY, int idVertice)
 		{
-			vertices.Add(new VerticePlus(valor, idVertice, posX, posY));
+			VerticePlus v = new VerticePlus(valor, idVertice, posX, posY);
+			vertices.Add(v);
 		}
 
 		//Adiciona uma aresta ja existente ao grafo
@@ -92,10 +93,10 @@ namespace GrafoWebService.NS_GrafoPlus
 			grafo.nome = this.nome;
 			grafo.width = this.width;
 			grafo.height = this.height;
-			foreach (ArestaPlus aresta in this.arestas)
-				grafo.arestas.Add(aresta.gerarDTO());
-			foreach (VerticePlus vertice in this.vertices)
-				grafo.vertices.Add(vertice.gerarDTO());
+			foreach (Vertice vertice in this.vertices)
+				grafo.vertices.Add(((VerticePlus)vertice).gerarDTO());
+			foreach (Aresta aresta in this.arestas)
+				grafo.arestas.Add(((ArestaPlus)aresta).gerarDTO());
 			return grafo;
 		}
 

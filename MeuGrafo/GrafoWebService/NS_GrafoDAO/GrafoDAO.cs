@@ -46,7 +46,7 @@ namespace GrafoWebService.NS_GrafoDAO
 				{
 					origem = ((VerticePlus)grafo.vertices.Find(o => ((VerticePlus)o).idVertice == aresta.id_origem));
 					destino = ((VerticePlus)grafo.vertices.Find(d => ((VerticePlus)d).idVertice == aresta.id_destino));
-					grafo.inserirAresta(origem, destino, aresta.peso);
+					grafo.inserirAresta(origem, destino, aresta.peso, aresta.id_aresta);
 				}
 
 				return grafo;
