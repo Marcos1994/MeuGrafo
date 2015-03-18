@@ -18,6 +18,7 @@ function ws_criarGrafo()
 					{
 						var grafo = retorno.objeto;
 						$("#nomeGrafoAberto").html(grafo.nome);
+						$("#nomeGrafoAberto").attr('class', grafo.idGrafo);
 						$("#grafo").css('width', parseInt(grafo.width));
 						$("#grafo").css('height', parseInt(grafo.height));
 						$("#grafo").html('<svg id="arestas" class="elementos" height="300px" width="600px"></svg><svg id="vertices" class="elementos" height="300px" width="600px"></svg>');
@@ -54,6 +55,7 @@ function ws_abrirGrafo()
 					{
 						var grafo = retorno.objeto;
 						$("#nomeGrafoAberto").html(grafo.nome);
+						$("#nomeGrafoAberto").attr('class', grafo.idGrafo);
 						$("#grafo").css('width', parseInt(grafo.width));
 						$("#grafo").css('height', parseInt(grafo.height));
 						$("#grafo").html('<svg id="arestas" class="elementos" height="300px" width="600px"></svg><svg id="vertices" class="elementos" height="300px" width="600px"></svg>');
