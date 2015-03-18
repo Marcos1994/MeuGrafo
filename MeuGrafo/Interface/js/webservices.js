@@ -69,7 +69,13 @@ function ws_abrirGrafo()
 											grafo.vertices[i].posY,
 											grafo.vertices[i].cor);
 						}
-						alert(grafo.arestas.length);
+						for(i = 0; i < grafo.arestas.length; i++)
+						{
+							desenharAresta(	grafo.arestas[i].idAresta,
+											grafo.arestas[i].idOrigem,
+											grafo.arestas[i].idDestino,
+											grafo.arestas[i].peso);
+						}
 					}
 					else
 					{

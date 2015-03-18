@@ -52,6 +52,17 @@ function desenharVertice(idVertice, valorVertice, posX, posY, cor)
 {
 	posX -= 15;
 	posY -= 15;
-	var vertice = $('#vertices').html() + '<circle cx="' + posX + '" cy="' + posY + '" r="10" stroke="black" stroke-width="2" fill="white" />'
+	var vertice = $('#vertices').html() + '<circle id="v' + idVertice + '" cx="' + posX + '" cy="' + posY + '" r="10" stroke="black" stroke-width="2" fill="' + cor + '" />'
 	$('#vertices').html(vertice);
+}
+
+function desenharAresta(idAresta, idOrigem, idDestino, peso)
+{
+	var xOrigem = $("#v" + idOrigem).attr('cx');
+	var xDestino = $("#v" + idDestino).attr('cx');
+	var yOrigem = $("#v" + idOrigem).attr('cy');
+	var yDestino = $("#v" + idDestino).attr('cy');
+	//var aresta = $('#arestas').html() + '<line id="a' + idAresta + '" x1="' + xOrigem + '" y1="' + yOrigem + '" x2="' + xDestino + '" y2="' + yDestino + '" style="stroke:rgb(255,0,0);stroke-width:2" />';
+	var aresta = $('#arestas').html() + '<line id="a' + idAresta + '" x1="' + xOrigem + '" y1="' + yOrigem + '" x2="' + xDestino + '" y2="' + yDestino + '" style="stroke:rgb(255,0,0);stroke-width:2" />';
+	$('#arestas').html(aresta);
 }
