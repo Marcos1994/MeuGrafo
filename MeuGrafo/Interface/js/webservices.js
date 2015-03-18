@@ -20,7 +20,7 @@ function ws_criarGrafo()
 						$("#nomeGrafoAberto").html(grafo.nome);
 						$("#grafo").css('width', parseInt(grafo.width));
 						$("#grafo").css('height', parseInt(grafo.height));
-						$("#grafo").html('');
+						$("#grafo").html('<svg id="arestas" class="elementos" height="300px" width="600px"></svg><svg id="vertices" class="elementos" height="300px" width="600px"></svg>');
 					}
 					else
 					{
@@ -56,10 +56,18 @@ function ws_abrirGrafo()
 						$("#nomeGrafoAberto").html(grafo.nome);
 						$("#grafo").css('width', parseInt(grafo.width));
 						$("#grafo").css('height', parseInt(grafo.height));
-						$("#grafo").html('');
+						$("#grafo").html('<svg id="arestas" class="elementos" height="300px" width="600px"></svg><svg id="vertices" class="elementos" height="300px" width="600px"></svg>');
+						$("#vertices").attr('width', grafo.width);
+						$("#vertices").attr('height', grafo.height);
+						$("#arestas").attr('width', grafo.width);
+						$("#arestas").attr('height', grafo.height);
 						for(i = 0; i < grafo.vertices.length; i++)
 						{
-							alert(grafo.vertices[i].idVertice);
+							desenharVertice(grafo.vertices[i].idVertice,
+											grafo.vertices[i].valor,
+											grafo.vertices[i].posX,
+											grafo.vertices[i].posY,
+											grafo.vertices[i].cor);
 						}
 						alert(grafo.arestas.length);
 					}

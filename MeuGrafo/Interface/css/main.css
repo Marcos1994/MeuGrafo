@@ -90,6 +90,8 @@ height: 210px;
 margin: 0px auto;
 }
 
+.elementos { position: absolute; }
+
 
 
 /*------------Modal------------*/

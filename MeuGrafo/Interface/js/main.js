@@ -47,3 +47,11 @@ function abrirGrafo()
 	html += '</form>';
 	$('#modal').html(html);
 }
+
+function desenharVertice(idVertice, valorVertice, posX, posY, cor)
+{
+	posX -= 15;
+	posY -= 15;
+	var vertice = $('#vertices').html() + '<circle cx="' + posX + '" cy="' + posY + '" r="10" stroke="black" stroke-width="2" fill="white" />'
+	$('#vertices').html(vertice);
+}
