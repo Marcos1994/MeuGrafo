@@ -16,7 +16,7 @@ namespace GrafoWebService.GrafoWebService
 	[WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
 	[System.ComponentModel.ToolboxItem(false)]
 	// To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
-	// [System.Web.Script.Services.ScriptService]
+	[System.Web.Script.Services.ScriptService]
 	public class GrafoWSA : System.Web.Services.WebService
 	{
 
@@ -79,7 +79,7 @@ namespace GrafoWebService.GrafoWebService
 				grafo.abrirGrafo();
 				GrafoDTO grafoDTO = grafo.gerarDTO();
 
-				return js.Serialize(grafoDTO);
+				return js.Serialize(new RetornoComposto(grafoDTO));
 			}
 			catch (Exception ex)
 			{

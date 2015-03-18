@@ -18,8 +18,8 @@ namespace GrafoWebService.NS_GrafoPlus
 		public GrafoPlus(string nome)
 		{
 			this.nome = nome;
-			this.width = 500;
-			this.height = 500;
+			this.width = 600;
+			this.height = 300;
 		}
 
 		//Abrir o grafo do banco a partir do nome

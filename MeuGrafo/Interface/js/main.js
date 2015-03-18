@@ -5,14 +5,6 @@ $(document).ready(function()
 		$("#slide").children('img').attr('src', $(this).attr('src'));
 		$("#slide").children('img').attr('alt', $(this).attr('alt'));
 		document.getElementById('descricaoSlide').innerHTML = $(this).attr('alt');
-		//alert($(this).attr('alt'));
-		//alert($("#slide").children('img').attr('src'));
-		//.		classe
-		//#		ID
-		//attr	puxar qq atributo de uma tag html
-		//		primeiro parametro = propriedade q irá ser utilizada
-		//		segundo parametro = atribuir valor à propriedade
-		//		obs.: se for colocar só o primeiro, é o mesmo q um get do valor
 	});
 	
 	$('#mascara').click(function()
@@ -41,6 +33,17 @@ function criarGrafo()
 	html += '<form action="javascript:ws_criarGrafo();">';
 	html += 'Nome do Grafo<br/> <input type="text" name="nomeGrafo" id="nomeGrafo"><br>';
 	html += '<input type="submit" value="Criar">';
+	html += '</form>';
+	$('#modal').html(html);
+}
+
+function abrirGrafo()
+{
+	abrirModal();
+	var html = "";
+	html += '<form action="javascript:ws_abrirGrafo();">';
+	html += 'Nome do Grafo<br/> <input type="text" name="nomeGrafo" id="nomeGrafo"><br>';
+	html += '<input type="submit" value="abrir">';
 	html += '</form>';
 	$('#modal').html(html);
 }

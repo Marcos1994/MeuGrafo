@@ -28,14 +28,16 @@
 						</svg>
 						<ol>
 							<li>
-								<svg class="icone" id="ico_abrir">
-									<rect fill="#F26101" fill-opacity="0" width="40" height="40"/>
-									<g>
-										<polygon fill="#91BED4" points="13,9 13,5 3,5 3,9 3,35 33,35 33,9 		"/>
-										<polygon fill="#304269" points="33,35 3,35 7,11 37,11 		"/>
-									</g>
-								</svg>
-								<h2>Abrir Grafo</h2>
+								<a href="javascript:abrirGrafo();">
+									<svg class="icone" id="ico_abrir">
+										<rect fill="#F26101" fill-opacity="0" width="40" height="40"/>
+										<g>
+											<polygon fill="#91BED4" points="13,9 13,5 3,5 3,9 3,35 33,35 33,9 		"/>
+											<polygon fill="#304269" points="33,35 3,35 7,11 37,11 		"/>
+										</g>
+									</svg>
+									<h2>Abrir Grafo</h2>
+								</a>
 							</li>
 							
 							<li>
@@ -218,7 +220,7 @@
 				</ul>
 			</div>
 		</div>
-		<h1>Nenhum grafo aberto</h1>
+		<h1 id="nomeGrafoAberto">Nenhum grafo aberto</h1>
 		<div id="grafo">
 		</div>
 		
