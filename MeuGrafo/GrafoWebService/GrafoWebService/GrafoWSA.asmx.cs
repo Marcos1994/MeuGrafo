@@ -6,6 +6,7 @@ using System.Web.Script.Serialization;
 using System.Web.Services;
 using GrafoWebService.NS_GrafoPlus;
 using GrafoWebService.NS_GrafoDTO;
+using System.Collections;
 
 namespace GrafoWebService.GrafoWebService
 {
@@ -196,5 +197,38 @@ namespace GrafoWebService.GrafoWebService
 		//	}
 		//	return js.Serialize(grafo);
 		//}
+
+		[WebMethod]
+		public string colorirGrafo(string nome)
+		{
+			JavaScriptSerializer js = new JavaScriptSerializer();
+
+			GrafoPlus grafo;
+			try
+			{
+				grafo = new GrafoPlus(nome);
+				grafo.abrirGrafo();
+				ArrayList cores = grafo.colorirGrafo();
+				ArrayList retorno = new ArrayList();
+
+				int i = 0;
+				foreach (List<GrafoSimples.Vertice> cor in cores)
+				{
+					List<VerticeDTO> vertices = new List<VerticeDTO>();
+					foreach (var v in cor)
+					{
+						vertices.Add(((VerticePlus)v).gerarDTO());
+					}
+					retorno.Add(vertices);
+				}
+
+				return js.Serialize(new RetornoComposto(retorno));
+			}
+			catch (Exception ex)
+			{
+				return js.Serialize(new GrafoWSErro(ex));
+			}
+			return js.Serialize(grafo);
+		}
 	}
 }

@@ -92,3 +92,47 @@ function ws_abrirGrafo()
 	
 	fecharModal();
 }
+
+function ws_colorirGrafo()
+{
+	var nomeGrafo = $('#nomeGrafoAberto').html();
+	
+	$.ajax
+	({
+		type: "POST",
+		url: "http://localhost:62822/GrafoWebService/GrafoWSA.asmx/colorirGrafo",
+		contentType: "application/json; charset=utf-8",
+		data: "{nome:'" + nomeGrafo + "'}",
+		dataType: "json",
+		success:function(data)
+				{
+					var retorno = $.parseJSON(data.d);
+					if(retorno.retorno == "ACK")
+					{
+						var cores = ["#f00", "#0f0", "#00f", "#ff0", "#0ff", "#f0f", "#fff", "#000"];
+						var vertices = retorno.objeto;
+						$("#vertices").html("");
+						for(j = 0; j < vertices.length; j++)
+						{
+							for(i = 0; i < vertices[j].length; i++)
+							{
+								desenharVertice(vertices[j][i].idVertice,
+												vertices[j][i].valor,
+												vertices[j][i].posX,
+												vertices[j][i].posY,
+												cores[j]);
+							}
+						}
+						
+					}
+					else
+					{
+						alert(retorno.mensagem)
+					}
+				},
+		error:	function(data)
+				{
+					alert(data.retorno);
+				}
+	});
+}

@@ -354,7 +354,10 @@ namespace GrafoSimples
 					adjacentes = verticeEmVisita.verticesAdjacentes();	//Pego seus adjacentes
 					foreach (Vertice v in adjacentes)					//E dos adjacentes...
 						if (v.visitado != visitado)						//Aquele que não foi visitado...
+						{
 							fila.Enqueue(v);							//Eu enfileiro
+							v.visitado = visitado;						//Dio que ele está para ser visitado
+						}
 
 					//Vou percorrer todas as cores procurando aquela que não contenha nenhum dos adjacentes do VerticeEmVisita
 					for (indiceCor = 0; indiceCor < cores.Count; indiceCor++)

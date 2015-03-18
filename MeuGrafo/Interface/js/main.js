@@ -48,6 +48,12 @@ function abrirGrafo()
 	$('#modal').html(html);
 }
 
+
+function colorirGrafo()
+{
+	ws_colorirGrafo();
+}
+
 function desenharVertice(idVertice, valorVertice, posX, posY, cor)
 {
 	posX -= 15;
